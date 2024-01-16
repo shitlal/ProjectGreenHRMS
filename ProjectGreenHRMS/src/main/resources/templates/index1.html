@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Form</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+.popup {
+            position: fixed;
+             z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+        .popup-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 30%;
+            font-weight: bolder;
+        }
+        .popup-content button {
+            display: block;
+            margin: 0 auto;
+        }
+        .show {
+            display: block;
+        }
+        h1 {
+            color: green;
+        }
+</style>
+
+  </head>
+  
+  <body>
+	   <div class="container">
+      <!--<div class="apply_box">-->
+        <h1>
+         Career Opportunities
+        
+        </h1>
+        
+        <form action="">
+          <brdiv class="form_container">
+			  
+			  <div class="button_container">
+            <button type="submit">Search</button>
+             <input type="text" placeholder="JobCode.." name="search">
+          </div>
+          
+          
+           <div class="button_container">
+            <button type="submit">Create New Job </button>  
+                 </div>
+                 
+                 <br></br>
+          
+     <div th:switch="${career}" class="container my-5"> 
+		  <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+             
+<table style="width:100%">
+  <tr class="header">
+<!--    <th style="width:02%;">S.no</th>-->
+    <th style="width:05%;">JobCode </th>
+	<th style="width:05%;">Position</th>
+     <th style="width:05%;">Description</th>
+      <th style="width:05%;">Location</th>
+       <th style="width:05%;">Experience</th>
+        <th style="width:20%;">Actions</th>
+        
+  </tr>
+  
+  <tr>
+    <tr th:each="career : ${career}">
+        <td th:text="${career.jobCode}"></td>
+        <td th:text="${career.position}"></td>
+        <td th:text="${career.description}"></td>
+        <td th:text="${career.location}"></td>
+        <td th:text="${career.experience}"></td>
+    <td><button1 type="submit">Add Candidate</button1> 
+     <button type="submit">Edit</button>  
+     <button2 type="submit"><a th:href="@{/delete/{id}(id=${career.id})}" class="btn btn-primary">Delete</a></button2>  
+     </td>
+    
+      </tr>
+ 
+    </table>
+     </div></div>    
+   </div>
+   <button id="myButton">
+          Click me
+      </button>
+    <div id="myPopup" class="popup">
+        <div class="popup-content">
+            <h1 style="color:green;">
+                  GeekforGeeks !
+              </h1>
+            <p>This is a popup box!</p>
+            <button id="closePopup">
+                  Close
+              </button>
+        </div>
+    </div>
+ 
+    <script>
+        myButton.addEventListener("click", function () {
+            myPopup.classList.add("show");
+        });
+        closePopup.addEventListener("click", function () {
+            myPopup.classList.remove("show");
+        });
+        window.addEventListener("click", function (event) {
+            if (event.target == myPopup) {
+                myPopup.classList.remove("show");
+            }
+        });
+    </script>
+ </body>
+</html>
