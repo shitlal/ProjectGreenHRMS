@@ -17,46 +17,51 @@ th, td {
 .popup {
             position: fixed;
              z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
+            left: 30%;
+            top: 20%;
+            width: 40%;
+            height: 40%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgb(0, 255, 255);
             display: none;
         }
         .popup-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
+            background-color: aqua;
+            margin: 20% auto;
+            padding: 30px;
             border: 1px solid #888888;
-            width: 30%;
+            width: 40%;
             font-weight: bolder;
         }
         .popup-content button {
             display: block;
-            margin: 0 auto;
+            margin: 10px;
         }
         .show {
             display: block;
         }
         h1 {
             color: green;
+
+         label {
+        display: inline-block;
+        width: 170px;
+        text-align: right;
         }
+      }
+        
 </style>
 
   </head>
-  
   <body>
 	   <div class="container">
       <!--<div class="apply_box">-->
-        <h1>
-         Career Opportunities
+		  <br>
+        <h1><i>Career Opportunities</i>
         
         </h1>
-        
         <form action="">
-          <brdiv class="form_container">
+          <div class="form_container">
 			  
 			  <div class="button_container">
             <button type="submit">Search</button>
@@ -64,11 +69,56 @@ th, td {
           </div>
           
           
-           <div class="button_container">
+         <!--  <div class="button_container">
             <button type="submit">Create New Job </button>  
-                 </div>
+                 </div>-->
                  
-                 <br></br>
+                                ___________________
+             
+<!--<button class="open-button" onclick="openForm()">Open Form</button>-->
+           <div class="button_container">
+ <button id="myButton"  onclick="showupdatebutton()">
+          Create New Job
+                </button>
+                
+                
+                 </div>
+    <div id="myPopup" class="popup">
+		
+			
+  <form th:action="@{/createJobDetail}" th:object="${career}"  method="post" class="popup-content">
+  
+  <br>
+  <label for="JobCode"><b>JobCode</b></label>
+    <input type="text" placeholder="JobCode" name="jobCode" required>
+   
+
+    <label for="Position"><b> Position</b></label>
+    <input type="Position" placeholder="Position" name="position" required>
+    <br>
+    <br>
+    
+      <label for="Location"><b>Location</b></label>
+    <input type="Location" placeholder="Location" name="location" required>
+  
+                 
+    <label for="Description"><b>Descript</b></label>
+    <input type="Description" placeholder="Description" name="description" required>
+    <br>
+    <br>
+    
+        <label for="Experience"><b>Experien</b></label>
+    <input type="Experience" placeholder="Experience" name="experience" required>
+    <br>
+    <br>
+
+    <button type="submit" id="updateId" class="btn" style="display: none;">Update</button>
+      <button type="submit" id="submitId" class="btn" style="display: none;">Submit</button>
+    <button type="button" class="btn cancel" id="closePopup">Close</button>
+    
+  </form>
+</div>
+    </div>
           
      <div th:switch="${career}" class="container my-5"> 
 		  <div class="col-md-10">
@@ -94,35 +144,27 @@ th, td {
         <td th:text="${career.description}"></td>
         <td th:text="${career.location}"></td>
         <td th:text="${career.experience}"></td>
-    <td><button1 type="submit">Add Candidate</button1> 
-     <button type="submit">Edit</button>  
+    <td>		<button1 type="submit"  onclick="functionName()">Add Candidate</button1>  
+
+             <button id="editId"  onclick="showupdatebutton()"> Edit  </button>   
+
      <button2 type="submit"><a th:href="@{/delete/{id}(id=${career.id})}" class="btn btn-primary">Delete</a></button2>  
      </td>
     
       </tr>
  
     </table>
-     </div></div>    
-   </div>
-   <button id="myButton">
-          Click me
-      </button>
-    <div id="myPopup" class="popup">
-        <div class="popup-content">
-            <h1 style="color:green;">
-                  GeekforGeeks !
-              </h1>
-            <p>This is a popup box!</p>
-            <button id="closePopup">
-                  Close
-              </button>
+<!--</div>-->
         </div>
+    </form>
     </div>
  
     <script>
         myButton.addEventListener("click", function () {
             myPopup.classList.add("show");
         });
+        
+
         closePopup.addEventListener("click", function () {
             myPopup.classList.remove("show");
         });
@@ -132,5 +174,19 @@ th, td {
             }
         });
     </script>
+    <script>
+		
+		
+		function showupdatebutton(){
+			if (document.getElementById("editId").clicked){
+				document.getElementById("submitId").style.display='none';
+				document.getElementById("updateId").style.display='block';
+			}
+			else{
+				document.getElementById("submitId").style.display='block';
+				document.getElementById("updateId").style.display='none';
+			}
+		}
+	</script>
  </body>
 </html>

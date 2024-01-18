@@ -39,5 +39,40 @@ public class CareerOppService {
 			System.out.println("No employee record exist for given id");
 		}
 	}
+	
+	public CareerOppEntity createOrUpdateJobDetail(CareerOppEntity entity) 
+	{
+		System.out.println("createOrUpdateJobDetail");
+		// Create new entry 
+		if(entity.getId()  == null) 
+		{
+			entity = repository.save(entity);
+			
+			return entity;
+		} 
+		else 
+		{
+			// update existing entry 
+			Optional<CareerOppEntity> jobDetail = repository.findById(entity.getId());
+			
+			if(jobDetail.isPresent()) 
+			{
+				CareerOppEntity newEntity = jobDetail.get();
+				newEntity.setJobCode(entity.getJobCode());
+				newEntity.setPosition(entity.getPosition());
+				newEntity.setLocation(entity.getLocation());
+				newEntity.setDescription(entity.getDescription());
+				newEntity.setExperience(entity.getExperience());
+				
+				newEntity = repository.save(newEntity);
+				
+				return newEntity;
+			} else {
+				entity = repository.save(entity);
+				
+				return entity;
+			}
+		}
+	}
 
 }

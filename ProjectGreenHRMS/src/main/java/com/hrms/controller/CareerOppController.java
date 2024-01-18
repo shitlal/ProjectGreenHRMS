@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hrms.model.CareerOppEntity;
@@ -42,14 +43,15 @@ public class CareerOppController {
 		return "redirect:/";
 		
 	}
-	/*
-	 * @RequestMapping("/createUser") public String createNewUser(Model model) {
-	 * 
-	 * System.out.println("createUser");
-	 * 
-	 * // service.deleteJobById(id); return "test";
-	 * 
-	 * }
-	 */
+	@PostMapping(path = "/createJobDetail")
+	public String createOrUpdateJobDetail(CareerOppEntity jobdetail) 
+	{
+		System.out.println("createJobDetail ");
+		
+		service.createOrUpdateJobDetail(jobdetail);
+		
+		return "redirect:/";
+	}
+
 
 }
