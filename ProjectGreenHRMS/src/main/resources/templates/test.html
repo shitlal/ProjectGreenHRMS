@@ -30,6 +30,21 @@ var topPos = (h-popH)/2;
 
 msgWindow = window.open('edit','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
 }
+function openeditWindow() {
+     var w = 480, h = 340;
+
+     if (document.getElementById) { 
+         w = screen.availWidth;
+         h = screen.availHeight;
+     }
+
+var popW = 300, popH = 200;
+
+var leftPos = (w-popW)/2;
+var topPos = (h-popH)/2;
+
+msgWindow = window.open('edit','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+}
 </script>
 </body>
 </html>
