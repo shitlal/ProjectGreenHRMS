@@ -15,7 +15,38 @@ th, td {
   background-color: #96D4D4;
 }
 
-        
+ #myInput {
+
+			background-position: 10px 10px;
+			background-repeat: no-repeat;
+			width: 15%;
+			font-size: 13px;
+			padding: 12px 20px 12px 40px;
+			border: 1px solid #ddd;
+			margin-bottom: 12px;
+		}
+
+		#myTable {
+			border-collapse: collapse;
+			width: 100%;
+			border: 1px solid #ddd;
+			font-size: 18px;
+		}
+
+		#myTable th,
+		#myTable td {
+			text-align: left;
+			padding: 12px;
+		}
+
+		#myTable tr {
+			border-bottom: 1px solid #ddd;
+		}
+
+		#myTable tr.header,
+		#myTable tr:hover {
+			background-color: #f1f1f1;
+		}       
 </style>
 
   </head>
@@ -31,7 +62,7 @@ th, td {
 			  
 			  <div class="button_container">
             <button type="submit">Search</button>
-             <input type="text" placeholder="JobCode.." name="search">
+             <input type="text" placeholder="JobCode.." name="search" id="myInput" onkeyup="myFunction()">
           </div>
           
              
@@ -53,9 +84,9 @@ th, td {
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
              
-<table style="width:100%">
+<table id="myTable"  style="width:100%">
   <tr class="header">
-   <th style="width:02%;"></th>
+   <th style="width:02%;">Sr. No.</th>
     <th style="width:05%;">JobCode </th>
 	<th style="width:05%;">Position</th>
      <th style="width:05%;">Description</th>
@@ -67,14 +98,14 @@ th, td {
   
   <tr>
     <tr th:each="career : ${career}">
-		<td><input type="hidden" id ="careerId" th:value="${career.id}"></td>
+		<td th:text="${career.id}"></td>
         <td th:text="${career.jobCode}"></td>
         <td th:text="${career.position}"></td>
         <td th:text="${career.description}"></td>
         <td th:text="${career.location}"></td>
         <td th:text="${career.experience}"></td>
         
-    <td>		<button1 type="submit"  onclick="functionName()">Add Candidate</button1>  
+    <td>		<button1 type="submit" >Add Candidate</button1>  
 
              <button type="submit" class="button1" id="editId" onclick="openeditWindow()"  >Edit </button>   
 
@@ -121,6 +152,25 @@ var topPos = (h-popH)/2;
 
 msgWindow = window.open('edit/'+careerId,'popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
 }
+function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
 </script>
    
     
