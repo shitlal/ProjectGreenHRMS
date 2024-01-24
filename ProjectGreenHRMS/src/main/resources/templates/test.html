@@ -7,69 +7,29 @@
     <meta name="viewport"
           content="width=device-width, 
                    initial-scale=1.0">
-    <style>
-        .popup {
-            position: fixed;
-             z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: none;
-        }
-        .popup-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888888;
-            width: 30%;
-            font-weight: bolder;
-        }
-        .popup-content button {
-            display: block;
-            margin: 0 auto;
-        }
-        .show {
-            display: block;
-        }
-        h1 {
-            color: green;
-        }
-    </style>
 </head>
  
 <body>
-    <h1>GeeksforGeeks</h1>
-    <h3>Create popup box using HTML and CSS</h3>
-    <button id="myButton">
-          Click me
-      </button>
-    <div id="myPopup" class="popup">
-        <div class="popup-content">
-            <h1 style="color:green;">
-                  GeekforGeeks !
-              </h1>
-            <p>This is a popup box!</p>
-            <button id="closePopup">
-                  Close
-              </button>
-        </div>
-    </div>
- 
-    <script>
-        myButton.addEventListener("click", function () {
-            myPopup.classList.add("show");
-        });
-        closePopup.addEventListener("click", function () {
-            myPopup.classList.remove("show");
-        });
-        window.addEventListener("click", function (event) {
-            if (event.target == myPopup) {
-                myPopup.classList.remove("show");
-            }
-        });
-    </script>
+
+<form>
+<input type="button" onClick="openWindow()" value="Click Me"> 
+</form>
+<script language="JavaScript">
+function openWindow() {
+     var w = 480, h = 340;
+
+     if (document.getElementById) { 
+         w = screen.availWidth;
+         h = screen.availHeight;
+     }
+
+var popW = 300, popH = 200;
+
+var leftPos = (w-popW)/2;
+var topPos = (h-popH)/2;
+
+msgWindow = window.open('edit','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+}
+</script>
 </body>
 </html>

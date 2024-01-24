@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Form</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+.popup {
+            position: fixed;
+             z-index: 1;
+            left: 30%;
+            top: 20%;
+            width: 40%;
+            height: 40%;
+            overflow: auto;
+            background-color: rgb(0, 255, 255);
+            display: none;
+        }
+        .popup-content {
+            background-color: aqua;
+            margin: 20% auto;
+            padding: 30px;
+            border: 1px solid #888888;
+            width: 40%;
+            font-weight: bolder;
+        }
+        .popup-content button {
+            display: block;
+            margin: 10px;
+        }
+        .show {
+            display: block;
+        }
+        h1 {
+            color: green;
+
+         label {
+        display: inline-block;
+        width: 170px;
+        text-align: right;
+        }
+      }
+        
+</style>
+
+  </head>
+  <body>
+	   <div class="container">
+      <!--<div class="apply_box">-->
+		  <br>
+        <h1><i>Career Opportunities</i>
+        
+        </h1>
+        <form action="">
+          <div class="form_container">
+			  
+			  <div class="button_container">
+            <button type="submit">Search</button>
+             <input type="text" placeholder="JobCode.." name="search">
+          </div>
+          
+          
+         <!--  <div class="button_container">
+            <button type="submit">Create New Job </button>  
+                 </div>-->
+                 
+                                ___________________
+             
+<!--<button class="open-button" onclick="openForm()">Open Form</button>-->
+           <div class="button_container">
+ <!--<button id="myButton"  >
+          Create New Job
+                </button>-->
+      <p class="my-5">
+                <a href="/edit" class="btn btn-primary">
+                <i class="fas fa-user-plus ml-2"> Create New Job </i></a>
+            </p>          
+                
+                 </div>
+  <!--  <div id="myPopup" class="popup">
+		
+			
+  <form th:action="@{/createJobDetail}" th:object="${career}"  method="post" class="popup-content">
+  
+  <br>
+  <label for="JobCode"><b>JobCode</b></label>
+    <input type="text" placeholder="JobCode" name="jobCode" required>
+   
+
+    <label for="Position"><b> Position</b></label>
+    <input type="Position" placeholder="Position" name="position" required>
+    <br>
+    <br>
+    
+      <label for="Location"><b>Location</b></label>
+    <input type="Location" placeholder="Location" name="location" required>
+  
+                 
+    <label for="Description"><b>Descript</b></label>
+    <input type="Description" placeholder="Description" name="description" required>
+    <br>
+    <br>
+    
+        <label for="Experience"><b>Experien</b></label>
+    <input type="Experience" placeholder="Experience" name="experience" required>
+    <br>
+    <br>
+
+    <button type="submit" id="updateId" class="btn" style="display: none;">Update</button>
+      <button type="submit" id="submitId" class="btn" style="display: none;">Submit</button>
+    <button type="button" class="btn cancel" id="closePopup">Close</button>
+    
+  </form>
+</div>-->
+    </div>
+          
+     <div th:switch="${career}" class="container my-5"> 
+		  <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+             
+<table style="width:100%">
+  <tr class="header">
+<!--    <th style="width:02%;">S.no</th>-->
+    <th style="width:05%;">JobCode </th>
+	<th style="width:05%;">Position</th>
+     <th style="width:05%;">Description</th>
+      <th style="width:05%;">Location</th>
+       <th style="width:05%;">Experience</th>
+        <th style="width:20%;">Actions</th>
+        
+  </tr>
+  
+  <tr>
+    <tr th:each="career : ${career}">
+        <td th:text="${career.jobCode}"></td>
+        <td th:text="${career.position}"></td>
+        <td th:text="${career.description}"></td>
+        <td th:text="${career.location}"></td>
+        <td th:text="${career.experience}"></td>
+    <td>		<button1 type="submit"  onclick="functionName()">Add Candidate</button1>  
+
+             <button type="submit" class="button1" id="editId"  > <a th:href="@{/edit/{id}(id=${career.id})}">Edit </a> </button>   
+
+     <button2 type="submit"><a th:href="@{/delete/{id}(id=${career.id})}" class="btn btn-primary">Delete</a></button2>  
+     </td>
+   
+      </tr>
+ 
+    </table>
+   
+<!--</div>-->
+        </div>
+    </form>
+    </div>
+ 
+    <!--<script>
+		
+		const btnsub = document.getElementById('submitId');
+         const btnupdate = document.getElementById('updateId');
+	    myButton.addEventListener("click", function () {
+            myPopup.classList.add("show");
+            btnsub.style.display = 'block';
+ 			 btnupdate.style.display = 'none';
+        });
+         
+        closePopup.addEventListener("click", function () {
+            myPopup.classList.remove("show");
+        });
+        
+
+        window.addEventListener("click", function (event) {
+            if (event.target == myPopup) {
+                myPopup.classList.remove("show");
+            }
+        });
+//        var btns = document.querySelectorAll('.button1');
+ 		
+		var button1 = document.getElementsByClassName("button1");
+		Object.keys(button1).map( function (key) {
+    	var button = button1[key] 
+    	button.addEventListener("click", function(){
+       		myPopup.classList.add("show");
+       		btnupdate.style.display = 'block';
+ 			btnsub.style.display = 'none';
+    	});
+});	
+ 
+        
+            </script>-->
+    
+ </body>
+</html>

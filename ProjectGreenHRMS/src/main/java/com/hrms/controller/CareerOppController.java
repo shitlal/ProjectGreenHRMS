@@ -1,6 +1,7 @@
 package com.hrms.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,9 @@ public class CareerOppController {
 //		System.out.println("getAllCareerOpp");
 		
 		List<CareerOppEntity> list = service.getAllCareerOpp();
-
+		int count=list.size();
 		model.addAttribute("career", list);
+		model.addAttribute("careercount", count);
 		
 		return "index1";
 	}
@@ -50,8 +52,23 @@ public class CareerOppController {
 		
 		service.createOrUpdateJobDetail(jobdetail);
 		
-		return "redirect:/";
+		return "index1";
 	}
-
+	@RequestMapping(path = {"/edit", "/edit/{id}"})
+	public String editJobById(Model model, @PathVariable("id") Optional<Integer> id) 
+							 
+	{
+		
+		System.out.println("editJobById" + id);
+		if (id.isPresent()) {
+			CareerOppEntity entity = service.getJobById(id.get());
+			model.addAttribute("career", entity);
+		} else {
+			model.addAttribute("career", new CareerOppEntity());
+		}
+		
+		
+		return "CreateCareerOpp";
+	}
 
 }

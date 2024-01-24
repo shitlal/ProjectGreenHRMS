@@ -74,5 +74,18 @@ public class CareerOppService {
 			}
 		}
 	}
+	
+	public CareerOppEntity getJobById(Integer id) 
+	{
+		System.out.println("getJobById");
+		Optional<CareerOppEntity> jobdetail = repository.findById(id);
+		
+		if(jobdetail.isPresent()) {
+			return jobdetail.get();
+		}else {
+			return null;
+		}
+	 
+	}
 
 }
