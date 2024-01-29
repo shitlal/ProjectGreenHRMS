@@ -52,7 +52,7 @@ public class CareerOppController {
 		
 		service.createOrUpdateJobDetail(jobdetail);
 		
-		return "test";
+		return "CloseAndRedirect";
 	}
 	@RequestMapping(path = {"/create", "/edit/{id}"})
 	public String editJobById(Model model, @PathVariable("id") Optional<Integer> id) 
