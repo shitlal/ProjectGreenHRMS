@@ -5,16 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
+@SequenceGenerator(name = "pg_job_detail_SEQ", sequenceName = "pg_job_detail_SEQ", allocationSize = 1)
+
 @Table(name="PG_JOB_DETAIL")
 
 public class CareerOppEntity {
 	
 
 	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pg_job_detail_SEQ")
 	    private Integer id;
 	    
 	    @Column(name="JOB_CODE")

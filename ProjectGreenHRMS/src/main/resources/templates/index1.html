@@ -50,7 +50,7 @@ th, td {
 </style>
 
   </head>
-  <body>
+  <body >
 	   <div class="container">
       <!--<div class="apply_box">-->
 		  <br>
@@ -86,7 +86,7 @@ th, td {
              
 <table id="myTable"  style="width:100%">
   <tr class="header">
-   <th style="width:02%;">Sr. No.</th>
+<!--   <th style="width:02%;">Sr. No.</th>-->
     <th style="width:05%;">JobCode </th>
 	<th style="width:05%;">Position</th>
      <th style="width:05%;">Description</th>
@@ -98,7 +98,7 @@ th, td {
   
   <tr>
     <tr th:each="career : ${career}">
-		<td th:text="${career.id}"></td>
+<!--		<td th:text="${career.id}"></td>-->
         <td th:text="${career.jobCode}"></td>
         <td th:text="${career.position}"></td>
         <td th:text="${career.description}"></td>
@@ -107,7 +107,7 @@ th, td {
         
     <td>		<button1 type="submit" >Add Candidate</button1>  
 
-             <button type="submit" class="button1" id="editId" onclick="openeditWindow()"  >Edit </button>   
+             <button type="submit" class="button1" id="editId" th:onclick="'openeditWindow(\'' + ${career.id} + '\');'"  >Edit </button>   
 
      <button2 type="submit"><a th:href="@{/delete/{id}(id=${career.id})}" class="btn btn-primary">Delete</a></button2>  
      </td>
@@ -134,10 +134,10 @@ var popW = 700, popH = 500;
 var leftPos = (w-popW)/2;
 var topPos = (h-popH)/2;
 
-msgWindow = window.open('edit','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+msgWindow = window.open('create','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
 }
-function openeditWindow() {
-	var careerId=document.getElementById("careerId").value;
+function openeditWindow(careerId) {
+//	var careerId=document.getElementById("careerId").value;
      var w = 480, h = 340;
 
      if (document.getElementById) { 
@@ -151,6 +151,7 @@ var leftPos = (w-popW)/2;
 var topPos = (h-popH)/2;
 
 msgWindow = window.open('edit/'+careerId,'popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+ window.close();
 }
 function myFunction() {
 			var input, filter, table, tr, td, i, txtValue;
@@ -171,6 +172,9 @@ function myFunction() {
 				}
 			}
 		}
+		
+		
+    
 </script>
    
     

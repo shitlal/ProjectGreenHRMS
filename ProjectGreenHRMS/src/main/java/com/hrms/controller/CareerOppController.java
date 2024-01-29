@@ -45,16 +45,16 @@ public class CareerOppController {
 		return "redirect:/";
 		
 	}
-	@PostMapping(path = "/createJobDetail")
+	@RequestMapping(path = "/createJobDetail")
 	public String createOrUpdateJobDetail(CareerOppEntity jobdetail) 
 	{
 		System.out.println("createJobDetail ");
 		
 		service.createOrUpdateJobDetail(jobdetail);
 		
-		return "index1";
+		return "test";
 	}
-	@RequestMapping(path = {"/edit", "/edit/{id}"})
+	@RequestMapping(path = {"/create", "/edit/{id}"})
 	public String editJobById(Model model, @PathVariable("id") Optional<Integer> id) 
 							 
 	{

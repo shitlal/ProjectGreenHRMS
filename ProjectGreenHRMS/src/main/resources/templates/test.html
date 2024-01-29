@@ -1,52 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
-    <meta name="viewport"
-          content="width=device-width, 
-                   initial-scale=1.0">
-                   <h1>Dedicated</h1>
+    <meta http-equiv="refresh" content="0;url=/newPage">
+    <title>Close Window</title>
 </head>
- 
 <body>
+    <!-- Your content goes here -->
 
-<form>
-<input type="button" onClick="openWindow()" value="Click Me"> 
-</form>
-<script language="JavaScript">
-function openWindow() {
-     var w = 480, h = 340;
-
-     if (document.getElementById) { 
-         w = screen.availWidth;
-         h = screen.availHeight;
-     }
-
-var popW = 300, popH = 200;
-
-var leftPos = (w-popW)/2;
-var topPos = (h-popH)/2;
-
-msgWindow = window.open('edit','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
-}
-function openeditWindow() {
-	
-     var w = 480, h = 340;
-
-     if (document.getElementById) { 
-         w = screen.availWidth;
-         h = screen.availHeight;
-     }
-
-var popW = 300, popH = 200;
-
-var leftPos = (w-popW)/2;
-var topPos = (h-popH)/2;
-
-msgWindow = window.open('edit','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
-}
-</script>
+    <script th:inline="javascript">
+        // JavaScript code to close the window
+        window.close();
+        window.opener.location.reload();
+    </script>
 </body>
 </html>

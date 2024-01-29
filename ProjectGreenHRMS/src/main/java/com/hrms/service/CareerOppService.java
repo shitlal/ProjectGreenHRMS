@@ -46,6 +46,7 @@ public class CareerOppService {
 		// Create new entry 
 		if(entity.getId()  == null) 
 		{
+			//entity.setId(8);
 			entity = repository.save(entity);
 			
 			return entity;
