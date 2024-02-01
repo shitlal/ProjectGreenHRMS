@@ -64,6 +64,7 @@ public class CareerOppService {
 				newEntity.setLocation(entity.getLocation());
 				newEntity.setDescription(entity.getDescription());
 				newEntity.setExperience(entity.getExperience());
+				newEntity.setStatus(entity.getStatus());
 				
 				newEntity = repository.save(newEntity);
 				

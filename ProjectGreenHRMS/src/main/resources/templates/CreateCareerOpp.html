@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 </head>
 
-<body>
+<body onload="change();">
 	
 	<!-- Navigation -->
 		<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -44,7 +44,8 @@
 	
     <div class="container my-5" style="padding-top: 30px;">
     
-        <h3> Add Opportunity</h3>
+        <h3 id="myHeader"> </h3>
+          <h3 aria-valuetext="${createupdateid}"> </h3>
         
         
         <div class="card">
@@ -57,35 +58,44 @@
                             <div class="form-group col-md-8">
                                  <label for="jobCode" class="col-form-label">Job Code</label> 
    								 <input type="text" th:field="*{jobCode}" class="form-control" 
-                                            id="jobCode" placeholder="Job Code"/>	
+                                            id="jobCode" placeholder="Job Code" required/>	
                             </div>
                             <div class="form-group col-md-8">
 								  <label for="position" class="col-form-label">Position</label> 
     							<input type="text" th:field="*{position}" class="form-control" 
-                                            id="position" placeholder="Position" />
+                                            id="position" placeholder="Position" required />
                                 
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="location" class="col-form-label">Location</label> 
                                 <input type="text" th:field="*{location}" class="form-control" 
-                                            id="location" placeholder="Location" />
+                                            id="location" placeholder="Location" required />
                             </div>
 							<div class="form-group col-md-8">
                                 <label for="description" class="col-form-label">Description</label> 
                                 <input type="text" th:field="*{description}" class="form-control" 
-                                            id="description" placeholder="Description" />
+                                            id="description" placeholder="Description" required/>
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="experience" class="col-form-label">Experience</label> 
                                 <input type="text" th:field="*{experience}" class="form-control" 
-                                            id="experience" placeholder="Experience" />
+                                            id="experience" placeholder="Experience" required/>
                             </div>
-                            
+                            <div class="form-group col-md-8">
+                                 
+                                <input type="radio"
+                                            id="active" name="status" th:field="*{status}" value="A"  required/>
+                                  <label for="active" class="col-form-label">Active</label>
+                                  <input type="radio"
+                                            id="inactive" name="status" th:field="*{status}"  value="I" required  />
+                                  <label for="inactive" class="col-form-label">InActive</label>
+                            </div>
                             <div class="col-md-6">
-                                <input type="submit" class="btn btn-primary" value=" Submit " >
+                                <input type="submit" id="submitId" class="btn btn-primary" value="" >
                             </div>
 
                             <input type="hidden" id="id" th:field="*{id}">
+                            <input type="hidden" id="createupdate" th:value="${createupdateid}">
     
                         </div>
                     </form>
@@ -94,11 +104,21 @@
         </div>
     </div>
     <script>
-    function closeMe()
+		function change()
 {
-    window.opener = self;
-    window.close();
-}</script>
+	createupdate=document.getElementById("createupdate").value
+	//alert();
+	if(createupdate=="edit"){
+    document.getElementById("submitId").value="Update";
+    myHeader.innerText = "Update Opportunity";
+    }
+    else{
+		document.getElementById("submitId").value="Submit";
+		myHeader.innerText = "Add Opportunity";
+	}
+}
+	</script>
+   
 </body>
 
 </html>

@@ -34,6 +34,9 @@ public class CareerOppEntity {
 
 	    @Column(name="EXPERIENCE")
 	    private String experience;
+	    
+	    @Column(name="STATUS")
+	    private String status;
 
 	    public Integer getId() {
 			return id;
@@ -95,11 +98,25 @@ public class CareerOppEntity {
 		}
 
 
+		public String getStatus() {
+			return status;
+		}
+
+
+		public void setStatus(String status) {
+			this.status = status;
+		}
+
+
 		@Override
 		public String toString() {
-			return "CareerOppEntity [jobCode=" + jobCode + ", position=" + position + ", description=" + description
-					+ ", location=" + location + ", experience=" + experience + "]";
+			return "CareerOppEntity [id=" + id + ", jobCode=" + jobCode + ", position=" + position + ", description="
+					+ description + ", location=" + location + ", experience=" + experience + ", status=" + status
+					+ "]";
 		}
+
+
+		
 	    
 	    
 	    

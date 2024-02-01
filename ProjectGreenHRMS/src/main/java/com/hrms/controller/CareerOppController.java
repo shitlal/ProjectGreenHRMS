@@ -57,18 +57,50 @@ public class CareerOppController {
 	@RequestMapping(path = {"/create", "/edit/{id}"})
 	public String editJobById(Model model, @PathVariable("id") Optional<Integer> id) 
 							 
-	{
+	{String edit=null;
 		
 		System.out.println("editJobById" + id);
 		if (id.isPresent()) {
+			 edit="edit";
 			CareerOppEntity entity = service.getJobById(id.get());
 			model.addAttribute("career", entity);
+			model.addAttribute("createupdateid", edit);
 		} else {
+			 edit="create";
 			model.addAttribute("career", new CareerOppEntity());
+			model.addAttribute("createupdateid", edit);
 		}
 		
 		
 		return "CreateCareerOpp";
 	}
-
+	
+	@PostMapping(path = "/addCandidates")
+	public String addCandidatesDetail(CareerOppEntity jobdetail)
+	{
+		System.out.println("addCandidatesDetail ");
+		
+//		service.createOrUpdateJobDetail(jobdetail);
+		
+		return "index1";
+	}
+	
+	@RequestMapping(path = {"/createCand"})
+	public String createCandidateDetail(Model model)
+							
+	{
+		
+		System.out.println("createCand" );
+//		if (id.isPresent()) {
+//			CareerOppEntity entity = service.getJobById(id.get());
+//			model.addAttribute("career", entity);
+//		} else {
+			model.addAttribute("career", new CareerOppEntity());
+//		}
+		
+		
+		return "AddCareerOpp";
+	}
+	
 }
+

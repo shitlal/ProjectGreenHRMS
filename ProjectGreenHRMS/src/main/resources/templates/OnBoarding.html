@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onboarding Form</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+select{
+  border:none;
+  padding: 10px 20px;
+  border-radius:5px;
+}
+
+select:focus{
+  outline:none;
+}
+       
+</style>
+
+  </head>
+  <body >
+	   <div class="container">
+    	  <br>
+        <h1><i>On Boarding</i>
+        
+        </h1>
+        <form action="">
+			<div class="button_container">
+			<label class="col-form-label" for="jobs">Job Code :    </label>
+  				         
+  				<select name="jobs" id="jobs">
+				    <option th:each="career : ${career}" 
+          th:value="${career.jobCode}" 
+          th:text="${career.jobCode}"></option>
+				</select>
+  				 </div>
+          
+          <div class="button_container">
+			<label class="col-form-label" for="candId">Candidate ID :    </label>
+  				         
+  				<select name="candId" id="candId">
+				    <option th:each="career : ${career}" 
+          th:value="${career.jobCode}" 
+          th:text="${career.jobCode}"></option>
+				</select>
+  				 </div>
+               
+    </form>
+    </div>
+ 
+   
+    
+ </body>
+</html>
