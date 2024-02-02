@@ -46,11 +46,7 @@ th, td {
 		#myTable tr.header,
 		#myTable tr:hover {
 			background-color: #f1f1f1;
-		}  
-		.scrollit {
-    overflow:scroll;
-    height:500px;
-}     
+		}       
 </style>
 
   </head>
@@ -83,7 +79,7 @@ th, td {
  
     </div>
           
-     <div th:switch="${career}" class="container my- scrollit"> 
+     <div th:switch="${career}" class="container my-5"> 
 		  <div class="col-md-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
@@ -91,29 +87,29 @@ th, td {
 <table id="myTable"  style="width:100%">
   <tr class="header">
 <!--   <th style="width:02%;">Sr. No.</th>-->
-    <th style="width:05%;" onclick="sortBy(0)">JobCode </th>
-	<th style="width:05%;" onclick="sortBy(1)">Position</th>
-     <th style="width:05%;" onclick="sortBy(2)">Description</th>
-      <th style="width:05%;" onclick="sortBy(3)">Location</th>
-       <th style="width:05%;" onclick="sortBy(4)">Experience</th>
-        <th style="width:20%;" onclick="sortBy(5)">Actions</th>
+    <th style="width:05%;">JobCode </th>
+	<th style="width:05%;">Position</th>
+     <th style="width:05%;">Description</th>
+      <th style="width:05%;">Location</th>
+       <th style="width:05%;">Experience</th>
+        <th style="width:20%;">Actions</th>
         
   </tr>
   
   <tr>
     <tr th:each="career : ${career}">
 <!--		<td th:text="${career.id}"></td>-->
-        <a th:href="@{/edit/{id}(id=${career.id})}" class="btn btn-primary"><td th:text="${career.jobCode}"></td></a>
+        <td th:text="${career.jobCode}"></td>
         <td th:text="${career.position}"></td>
         <td th:text="${career.description}"></td>
         <td th:text="${career.location}"></td>
         <td th:text="${career.experience}"></td>
         
-    <td>		<button1 type="submit" onclick="openaddcandWindow()">Add Candidate</button1>  
+    <td>		<button1 type="submit" >Add Candidate</button1>  
 
              <button type="submit" class="button1" id="editId" th:onclick="'openeditWindow(\'' + ${career.id} + '\');'"  >Edit </button>   
 
-     <button2 type="submit" th:onclick="'confirmation(\'' + ${career.id} + '\');'" >Delete</button2>  
+     <button2 type="submit"><a th:href="@{/delete/{id}(id=${career.id})}" class="btn btn-primary">Delete</a></button2>  
      </td>
    
       </tr>
@@ -121,51 +117,10 @@ th, td {
     </table>
    
 <!--</div>-->
-        </div></div></div>
+        </div>
     </form>
     </div>
  <script language="JavaScript">
-	 
-	 cPrev = -1; 
-function sortBy(c) {
-    rows = document.getElementById("myTable").rows.length; // num of rows
-    columns = document.getElementById("myTable").rows[0].cells.length; // num of columns
-    arrTable = [...Array(rows)].map(e => Array(columns)); // create an empty 2d array
-
-    for (ro=0; ro<rows; ro++) { // cycle through rows
-        for (co=0; co<columns; co++) { // cycle through columns
-            // assign the value in each row-column to a 2d array by row-column
-            arrTable[ro][co] = document.getElementById("myTable").rows[ro].cells[co].innerHTML;
-        }
-    }
-
-    th = arrTable.shift(); // remove the header row from the array, and save it
-    
-    if (c !== cPrev) { // different column is clicked, so sort by the new column
-        arrTable.sort(
-            function (a, b) {
-                if (a[c] === b[c]) {
-                    return 0;
-                } else {
-                    return (a[c] < b[c]) ? -1 : 1;
-                }
-            }
-        );
-    } else { // if the same column is clicked then reverse the array
-        arrTable.reverse();
-    }
-    
-    cPrev = c; // save in previous c
-
-    arrTable.unshift(th); // put the header back in to the array
-
-    // cycle through rows-columns placing values from the array back into the html table
-    for (ro=0; ro<rows; ro++) {
-        for (co=0; co<columns; co++) {
-            document.getElementById("myTable").rows[ro].cells[co].innerHTML = arrTable[ro][co];
-        }
-    }
-}
 function openWindow() {
      var w = 480, h = 340;
 
@@ -180,12 +135,6 @@ var leftPos = (w-popW)/2;
 var topPos = (h-popH)/2;
 
 msgWindow = window.open('create','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
-}
-function confirmation(careerId){
-	  if (window.confirm("Do you really want to delete?")) {  
-		  window.location.href('delete/'+careerId);
-  document.getElementById("conf").innerHTML = "you have successfully deleted the file"  
-}  
 }
 function openeditWindow(careerId) {
 //	var careerId=document.getElementById("careerId").value;
@@ -204,21 +153,6 @@ var topPos = (h-popH)/2;
 msgWindow = window.open('edit/'+careerId,'popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
  window.close();
 }
-function openaddcandWindow() {
-     var w = 480, h = 340;
-
-     if (document.getElementById) { 
-         w = screen.availWidth;
-         h = screen.availHeight;
-     }
-
-var popW = 700, popH = 500;
-
-var leftPos = (w-popW)/2;
-var topPos = (h-popH)/2;
-
-msgWindow = window.open('createCand','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
-}
 function myFunction() {
 			var input, filter, table, tr, td, i, txtValue;
 
@@ -227,7 +161,7 @@ function myFunction() {
 			table = document.getElementById("myTable");
 			tr = table.getElementsByTagName("tr");
 			for (i = 0; i < tr.length; i++) {
-				td = tr[i].getElementsByTagName("td")[0];
+				td = tr[i].getElementsByTagName("td")[1];
 				if (td) {
 					txtValue = td.textContent || td.innerText;
 					if (txtValue.toUpperCase().indexOf(filter) > -1) {
