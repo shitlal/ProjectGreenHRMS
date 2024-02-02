@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.hrms.model.CareerOppEntity;
 
 @Repository
-public interface CareerOppRepository2 extends JpaRepository<CareerOppEntity, Integer>{
+public interface OnBoardingRepository extends JpaRepository<CareerOppEntity, Integer>{
 
 }
