@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.CareerOppEntity;
+import com.hrms.model.RecruitmentEntity;
 import com.hrms.repository.CareerOppRepository;
+import com.hrms.repository.RecruitmentRepository;
 
 @Service
 public class CareerOppService {
 
 	@Autowired
 	CareerOppRepository repository;
+	@Autowired
+	RecruitmentRepository crepository;
 	public List<CareerOppEntity> getAllCareerOpp()
 	{
 //		System.out.println("getAllCareerOpp");
@@ -89,5 +93,28 @@ public class CareerOppService {
 		}
 	 
 	}
+	public RecruitmentEntity createCandidateDetail(RecruitmentEntity Entity)
+	{
+		// TODO Auto-generated method stub
+		System.out.println("createCandidateDetail");
+		//if (Entity.getCandidateid() == null)
+		{
+			Entity = crepository.save(Entity);
+			
+		
+		}
+		return Entity;
+		
+			
+}
 
+/*
+ * public CareerOppEntity getJobByjobCode(String jobCode) { {
+ * System.out.println("getJobById"); Optional<CareerOppEntity> jobdetail =
+ * repository.findByjobCode(jobCode);
+ * 
+ * if(jobdetail.isPresent()) { return jobdetail.get(); }else { return null; }
+ * 
+ * }
+ */
 }

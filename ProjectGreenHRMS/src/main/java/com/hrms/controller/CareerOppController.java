@@ -6,12 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.hrms.model.RecruitmentEntity;
 import com.hrms.model.CareerOppEntity;
+import com.hrms.repository.CareerOppRepository;
 import com.hrms.service.CareerOppService;
+import com.hrms.service.RecruitmentService;
+
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +26,12 @@ public class CareerOppController {
 	
 	@Autowired
 	CareerOppService service;
+	
+	@Autowired
+	CareerOppRepository repo;
+
+	@Autowired
+	RecruitmentService recservice;
 
 	@RequestMapping
 	public String getAllCareerOpp(Model model) 
@@ -36,15 +46,22 @@ public class CareerOppController {
 		return "index1";
 	}
 	
-	@RequestMapping("/delete/{id}")
-	public String deleteJobByJobCode(Model model, @PathVariable("id") Integer id) {
-		
-		System.out.println("deleteJobByJobCode");
-		
-		service.deleteJobById(id);
-		return "redirect:/";
-		
-	}
+//	@RequestMapping("/delete/{id}")
+//	public String deleteJobByJobCode(Model model, @PathVariable("id") Integer id) {
+//		
+//		System.out.println("deleteJobByJobCode");
+//		
+//		service.deleteJobById(id);
+//		return "redirect:/";
+//		
+//	}
+	
+	@GetMapping("/delete/{id}")
+    public String deleteEntity(@PathVariable Integer id) {
+		repo.deleteById(id);
+        return "redirect:/";  // Redirect to the page showing the list of entities
+    }
+
 	@RequestMapping(path = "/createJobDetail")
 	public String createOrUpdateJobDetail(CareerOppEntity jobdetail) 
 	{
@@ -67,7 +84,14 @@ public class CareerOppController {
 			model.addAttribute("createupdateid", edit);
 		} else {
 			 edit="create";
-			model.addAttribute("career", new CareerOppEntity());
+			 CareerOppEntity careerOpp=new CareerOppEntity();
+			 CareerOppEntity savedEntity = repo.save(careerOpp);
+    Integer jobId=savedEntity.getId();
+    String jobCode="C0"+jobId;
+		        // Pass the generated ID to the view
+		        
+    careerOpp.setJobCode(jobCode);
+			model.addAttribute("career", careerOpp);
 			model.addAttribute("createupdateid", edit);
 		}
 		
@@ -76,11 +100,12 @@ public class CareerOppController {
 	}
 	
 	@PostMapping(path = "/addCandidates")
-	public String addCandidatesDetail(CareerOppEntity jobdetail)
+	public String createCandidateDetail(RecruitmentEntity candidatedetail)
 	{
-		System.out.println("addCandidatesDetail ");
+		System.out.println("CandidatesDetail ");
 		
 //		service.createOrUpdateJobDetail(jobdetail);
+		  recservice.createCandidateDetail(candidatedetail);
 		
 		return "index1";
 	}
@@ -95,12 +120,10 @@ public class CareerOppController {
 //			CareerOppEntity entity = service.getJobById(id.get());
 //			model.addAttribute("career", entity);
 //		} else {
-			model.addAttribute("career", new CareerOppEntity());
+			model.addAttribute("Recruit", new RecruitmentEntity());
 //		}
-		
 		
 		return "AddCareerOpp";
 	}
 	
 }
-

@@ -99,10 +99,10 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 15px;
-  width: 150px;
+  width: 120px;
 }
 label1{
-	 background-color: rgb(255, 0, 128);
+	 background-color: rgb(0, 128, 192);
   border: transparent solid 2px;
   padding: 5px 5px;
   color: white;
@@ -111,62 +111,67 @@ label1{
 	
 }
 
-       
 </style>
 
   </head>
   
   <body>
 	   <div class="container">
- 
 		  <br>
         <h1><i>Recruitment Page</i> </h1>
         
         <br>
-        
-
+    
 <br>
 
-<form action=" ">
-  <label1 for=" ">Job_Code:</label1>
-  <select name="career">
-    
+ <div>
+
+  <label1  for=" ">Job_Code:</label1>
+   
+  <select name="career" id="career"  th:onclick="Dropdowns(show{jobCode})"  >
       <option
        th:each="career : ${career}" 
+       th:action="@{/show/{jobCode}}" 
        th:text="${career.jobCode}"
-       th:value="${career.jobCode}"
-      </option>
-   
+       th:value="${career.jobCode}" 
+     
+          </option>
+       
   </select>
+ 
+  <!--<button4 name="submit" type="submit" value="save"/button4>-->
+  <!--<button type="submit" class="button1" id="formaction" th:onclick="Dropdowns(show{C01213)})"  >click </button>-->
   
   <br><br>
- <!-- <input type="submit" value="Submit">-->
-</form>
-
-
-        <form action=""  >
- 	    <form action="" class="form_container" >
-			  
+  
+            
+ 	    <form action="" class="form_container" id="formaction" >
+			 		 			  
 			   <br>
 	 <label for="Position"><b> Position</b></label>
-    <input type="Position" placeholder="Position" name="position"  th:value="${Position}">
+    <input type="text" placeholder="Position" name="position" id="positions"   th:value="${Position}" >
+    
     
      <label for="Location"><b>Location</b></label>
-    <input type="Location" placeholder="Location" name="location" required>
+    <input type="text" placeholder="Location" name="location" th:value="${Location}" >
     
     <label for="Description"><b>Description</b></label>
-    <input type="Description" placeholder="Description" name="description" required>
+    <input type="Description" placeholder="Description" name="description" th:value="${Description}">
     
     
      <label for="Experience"><b>Experience</b></label>
-    <input type="Experience" placeholder="Experience" name="experience" required>
-   
+    <input type="Experience" placeholder="Experience" name="experience" th:value="${experience}" >
     
+   
   </form>
+  </form>
+ 
+ </div>
+  
   <br>
   <br>
   
-     <div th:switch="${Recruit}" class="container my-5"> 
+    <div th:switch="${Recruit}" class="container my-5"> 
 		  <div class="col-md-10">
                 <h2 th:case="null">No record found !!</h2>
                 <div th:case="*">
@@ -174,10 +179,10 @@ label1{
   
    <table style="width:100%">
   <tr class="header">
-   <th style="width:10%;">candidateid</th>
+   <th style="width:10%;" >candidateid</th>
     <th style="width:10%;">candidatename</th>
      <th style="width:20%;">current_location</th>
-     <th style="width:20%;">experience</th>
+     <th style="width:20%;">cand_experience</th>
       <th style="width:20%;">lastinterview_round</th>
        <th style="width:20%;">selection_status</th>
                   </tr>
@@ -196,7 +201,7 @@ label1{
         <td th:text="${Recruit.candidateid}"></td>
         <td th:text="${Recruit.candidatename}"></td>
         <td th:text="${Recruit.current_location}"></td>
-        <td th:text="${Recruit.experience}"></td>
+        <td th:text="${Recruit.cand_experience}"></td>
         <td th:text="${Recruit.lastinterview_round}"></td>
         <td th:text="${Recruit.selection_status}"></td>
         </tr>
@@ -206,11 +211,34 @@ label1{
 <!--    <input type="text" id="id" th:value="${Recruitcount}">-->
     
      <div class="button_container">
- <button id="myButton"  > Create New Job</button>
+
+ <button type="submit" id="myButton" onclick="openaddcandWindow()">Add Candidate</button> 
           
          </div>
     	   </div></div></div>
+    	   <br>
+    	   
+      
+    	 	   
+    	<script>
+			function openaddcandWindow() {
+				var w = 480, h = 340;
 
+				if (document.getElementById) {
+					w = screen.availWidth;
+					h = screen.availHeight;
+				}
+
+				var popW = 700, popH = 500;
+
+				var leftPos = (w - popW) / 2;
+				var topPos = (h - popH) / 2;
+
+				msgWindow = window.open('createCand', 'popup', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+			}
+       
+           			
+		</script>
 
  </body>
 </html>

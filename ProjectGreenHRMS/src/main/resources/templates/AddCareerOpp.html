@@ -21,72 +21,51 @@
         <div class="card">
             <div class="card-body">
                 <div class="col-md-10">
-                    <form th:action="@{/addCandidates}" th:object="${career}" method="post">
+                    <form th:action="@{/addCandidates}" th:object="${Recruit}" method="post">
                     
                     	<div class="row">
                         	
                             <div class="form-group col-md-8">
-                                 <label for="candidate ID" class="col-form-label">candidate ID</label> 
-   								 <input type="text" th:field="*{jobCode}" class="form-control" 
-                                            id="candidate ID" placeholder="candidate ID"/>	
+                                 <label for="candidateid" class="col-form-label">candidateid</label> 
+   								 <input type="text" th:field="*{candidateid}" class="form-control" 
+                                            id="candidateid" placeholder="candidateid"/>	
                             </div>
                             <div class="form-group col-md-8">
-								  <label for="Name" class="col-form-label">Name</label> 
-    							<input type="text" th:field="*{position}" class="form-control" 
-                                            id="Name" placeholder="Name" />
+								  <label for="candidatename" class="col-form-label">candidatename</label> 
+    							<input type="text" th:field="*{candidatename}" class="form-control" 
+                                            id="candidatename" placeholder="candidatename" />
                                 
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="Current location" class="col-form-label"> Current Location</label> 
-                                <input type="text" th:field="*{location}" class="form-control" 
-                                            id="Current location" placeholder="Current Location" />
+                                <label for="current_location" class="col-form-label">current_location</label> 
+                                <input type="text" th:field="*{current_location}" class="form-control" 
+                                            id="current_location" placeholder="current_location" />
                             </div>
 							<div class="form-group col-md-8">
-                                <label for="Experience" class="col-form-label">Experience</label> 
-                                <input type="text" th:field="*{description}" class="form-control" 
-                                            id="Experience" placeholder="Experience" />
+                                <label for="cand_experience" class="col-form-label">cand_experience</label> 
+                                <input type="text" th:field="*{cand_experience}" class="form-control" 
+                                            id="cand_experience" placeholder="cand_experience" />
                             </div>
                             
                             <div class="form-group col-md-8">
-                                <label for="Last Interview Round" class="col-form-label">Last InterviewRound</label> 
-                                <input type="text" th:field="*{description}" class="form-control" 
-                                            id="Last InterviewRound" placeholder="Last InterviewRound" />
+                                <label for="lastinterview_round" class="col-form-label">lastinterview_round</label> 
+                                <input type="text" th:field="*{lastinterview_round}" class="form-control" 
+                                            id="lastinterview_round" placeholder="lastinterview_round" />
                             </div>
                             
                             
                             <div class="form-group col-md-8">
-                                <label for="Last Interview Round" class="col-form-label">Last InterviewRound</label> 
-                                <input type="text" th:field="*{description}" class="form-control" 
-                                            id="Last InterviewRound" placeholder="Last InterviewRound" />
+                                <label for="selection_status" class="col-form-label">selection_status</label> 
+                                <input type="text" th:field="*{selection_status}" class="form-control" 
+                                            id="selection_status" placeholder="selection_status" />
                             </div>
-                            
-                            
-                             <div class="form-group col-md-8">
-                                <label for="Selection status" class="col-form-label">Selection status</label> 
-                                <input type="text" th:field="*{description}" class="form-control" 
-                                            id="Selection status" placeholder="Selection status" />
-                            </div>
-                            
-                                                      
-                            
-                      <!--      <div class="form-group col-md-8">
-                                <label for="Interview Status" class="col-form-label">Interview Status</label> 
-                                <input type="text" th:field="*{experience}" class="form-control" 
-                                            id="Interview Status" placeholder="Interview Status" />
-                            </div>
-                            
-                             <div class="form-group col-md-8">
-                                <label for="Final Status" class="col-form-label">Final Status</label> 
-                                <input type="text" th:field="*{experience}" class="form-control" 
-                                            id="Final Status" placeholder="Final Status" />
-                            </div>-->
-                            
-                            
+                                                                     
+                                                
                             <div class="col-md-6">
                                 <input type="submit" class="btn btn-primary" value=" Submit ">
                             </div>
 
-<!--                            <input type="hidden" id="id" th:field="*{id}">-->
+                       <!--   <input type="hidden" id="id" th:field="*{id}">-->
     
                         </div>
                     </form>
