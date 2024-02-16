@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hrms.model.RecruitmentEntity;
 import com.hrms.model.CareerOppEntity;
 import com.hrms.repository.CareerOppRepository;
+import com.hrms.repository.RecruitmentRepository;
 import com.hrms.service.CareerOppService;
 import com.hrms.service.RecruitmentService;
 
@@ -32,6 +33,9 @@ public class CareerOppController {
 
 	@Autowired
 	RecruitmentService recservice;
+
+	@Autowired
+	RecruitmentRepository recrepo;
 
 	@RequestMapping
 	public String getAllCareerOpp(Model model) 
@@ -99,7 +103,7 @@ public class CareerOppController {
 		return "CreateCareerOpp";
 	}
 	
-	@PostMapping(path = "/addCandidates")
+	 @RequestMapping(path = "/addCandidates")
 	public String createCandidateDetail(RecruitmentEntity candidatedetail)
 	{
 		System.out.println("CandidatesDetail ");
@@ -110,20 +114,39 @@ public class CareerOppController {
 		return "index1";
 	}
 	
+	/*
+	 * @RequestMapping(path = {"/createCand"}) public String
+	 * createCandidateDetail(Model model)
+	 * 
+	 * {
+	 * 
+	 * System.out.println("createCand" );
+	 * 
+	 * { model.addAttribute("Recruit", new RecruitmentEntity()); }
+	 * 
+	 * return "AddCareerOpp"; }
+	 */
+	
 	@RequestMapping(path = {"/createCand"})
 	public String createCandidateDetail(Model model)
 							
 	{
 		
 		System.out.println("createCand" );
-//		if (id.isPresent()) {
-//			CareerOppEntity entity = service.getJobById(id.get());
-//			model.addAttribute("career", entity);
-//		} else {
-			model.addAttribute("Recruit", new RecruitmentEntity());
-//		}
+
+
+               {
+        RecruitmentEntity recopp=new RecruitmentEntity();
+        RecruitmentEntity savedEntity=recrepo.save(recopp);
+        Integer canId=savedEntity.getCandidateid();
+            	   
+        recopp.setCandidateid(canId);
+        
+	  model.addAttribute("Recruit", recopp);
+	  
+		}
 		
 		return "AddCareerOpp";
-	}
 	
+	}
 }

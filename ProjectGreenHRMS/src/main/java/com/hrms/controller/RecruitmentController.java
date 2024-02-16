@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hrms.model.CareerOppEntity;
 import com.hrms.model.RecruitmentEntity;
+import com.hrms.repository.RecruitmentRepository;
 import com.hrms.service.CareerOppService;
 import com.hrms.service.RecruitmentService;
 
@@ -28,6 +29,9 @@ public class RecruitmentController
 
 	@Autowired
 	RecruitmentService recservice;
+	
+	@Autowired
+	RecruitmentRepository recrepo;
 
 	@RequestMapping()
 	public String getAllCareerOpp(Model model) {
@@ -99,7 +103,19 @@ public class RecruitmentController
 		return "Recruitment";
 	}
 	
-	@PostMapping(path = {"/createCand"})
+	/*
+	 * @PostMapping(path = {"/createCand"}) public String
+	 * createCandidateDetail(Model model)
+	 * 
+	 * { System.out.println("createCand" );
+	 * 
+	 * {
+	 * 
+	 * model.addAttribute("Recruit", new RecruitmentEntity());
+	 * 
+	 * } return "AddCareerOpp"; }
+	 */
+	 @RequestMapping(path = {"/createCand"})
 	public String createCandidateDetail(Model model)
 							
 	{
@@ -108,15 +124,20 @@ public class RecruitmentController
 
 
                {
-	  model.addAttribute("Recruit", new RecruitmentEntity());
+        RecruitmentEntity recopp=new RecruitmentEntity();
+        RecruitmentEntity savedEntity=recrepo.save(recopp);
+        Integer canId=savedEntity.getCandidateid();
+            	   
+        recopp.setCandidateid(canId);
+        
+	  model.addAttribute("Recruit", recopp);
+	  
 		}
 		
 		
 		return "AddCareerOpp";
+	
 	}
-	
-	
-	
 	}
 	
 

@@ -69,8 +69,10 @@
 			<div class="button_container">
 				<label class="col-form-label" for="jobs">Job Code : </label>
  
-				<select name="jobs" id="jobs">
-					<option th:each="career : ${career}" th:value="${career.jobCode}" th:text="${career.jobCode}">
+				<select id="jobCode" >
+					<option th:each="career : ${career}" 
+					th:value="${career.jobCode}" 
+					th:text="${career.jobCode}">
 					</option>
 				</select>
 			</div>
@@ -78,7 +80,7 @@
 			<div class="button_container">
 				<label class="col-form-label" for="candId">Candidate ID : </label>
  
-				<select name="candId" id="candId">
+				<select name="candId" id="candId"  >
 					<option th:each="career : ${career}" th:value="${career.jobCode}" th:text="${career.jobCode}">
 					</option>
 				</select>
@@ -97,6 +99,8 @@
 		</form>
 	</div>
 	<script>
+		
+		
 		function openWindow1() {
 			var w = 520, h = 360;
  
