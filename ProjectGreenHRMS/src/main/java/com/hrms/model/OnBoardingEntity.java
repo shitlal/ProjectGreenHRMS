@@ -1,25 +1,30 @@
 package com.hrms.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
+
+@SequenceGenerator(name = "PG_ONBOARDING_DETAIL_SEQ", sequenceName = "PG_ONBOARDING_DETAIL_SEQ", allocationSize = 1)
 @Table(name = "PG_ONBOARDING_DETAIL")
 public class OnBoardingEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PG_ONBOARDING_DETAIL_SEQ")
 	@Column(name = "EMPLOYEEID")
-	private Long EmpolyeeId;
+	private Integer EmpolyeeId;
 
 	@Column(name = "DATEOFJOINING")
-	private Integer DateOfJoining;
-
-	@Column(name = "CAND_EXPERIENCE")
+	private Date DateOfJoining;
+	
+	@Column(name = "EXPLEVEL")
 	private String Level;
 
 	@Column(name = "BACKGROUNDCHECKSTATUS")
@@ -42,32 +47,32 @@ public class OnBoardingEntity {
 
 	}
 
-	public OnBoardingEntity(Long empolyeeId, Integer dateOfJoining, String level, String backgroundCheckStatus,
+	public OnBoardingEntity(Integer empolyeeId, Date dateOfJoining, String level, String backgroundCheckStatus,
 			String probationPeriod, String idProofpath, String photographPath, String relivingLetterPath) {
 		super();
-		EmpolyeeId = empolyeeId;
-		DateOfJoining = dateOfJoining;
-		Level = level;
-		BackgroundCheckStatus = backgroundCheckStatus;
-		ProbationPeriod = probationPeriod;
+		this.EmpolyeeId = empolyeeId;
+		this.DateOfJoining = dateOfJoining;
+		this.Level = level;
+		this.BackgroundCheckStatus = backgroundCheckStatus;
+		this.ProbationPeriod = probationPeriod;
 		this.IdProofpath = idProofpath;
 		this.photographPath = photographPath;
 		this.relivingLetterPath = relivingLetterPath;
 	}
 
-	public Long getEmpolyeeId() {
+	public Integer getEmpolyeeId() {
 		return EmpolyeeId;
 	}
 
-	public void setEmpolyeeId(Long empolyeeId) {
+	public void setEmpolyeeId(Integer empolyeeId) {
 		EmpolyeeId = empolyeeId;
 	}
 
-	public Integer getDateOfJoining() {
+	public Date getDateOfJoining() {
 		return DateOfJoining;
 	}
 
-	public void setDateOfJoining(Integer dateOfJoining) {
+	public void setDateOfJoining(Date dateOfJoining) {
 		DateOfJoining = dateOfJoining;
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.CareerOppEntity;
 import com.hrms.model.RecruitmentEntity;
@@ -51,7 +53,6 @@ public class RecruitmentController
 		/* model.addAttribute("experience", count1); */
 		/* model.addAttribute("Position",count); */
 		
-
 		return "Recruitment";
 	}
 
@@ -67,29 +68,13 @@ public class RecruitmentController
 	}
 	
 	
-	@RequestMapping(path = "/show/{jobCode}",  method = RequestMethod.GET)
-	public String getByJobCode(Model model, @PathVariable("jobCode") Optional<String> jobCode) 
-							 
-	{
-		
-		
-		if (jobCode.isPresent()) 
-		{
-			
-			System.out.println(jobCode);
-			
-			CareerOppEntity entity = recservice.getByJobCode(jobCode.get());
-			 model.addAttribute("career", entity); 
-			 
-		    model.addAttribute("Position", entity.getPosition()); 
-			model.addAttribute("Location", entity.getLocation()); 
-			model.addAttribute("Description", entity.getDescription()); 
-			model.addAttribute("Experience ", entity.getExperience()); 
-				
-		}
-		
-		return "Recruitment";
-	}
+	@GetMapping(path = { "show/{jobCode}" })
+    @ResponseBody
+    public ResponseEntity<CareerOppEntity> getByJobCode(Model model, @PathVariable("jobCode") String jobCode) {
+        // Your logic to fetch data based on the selected value
+		CareerOppEntity entity = recservice.getByJobCode(jobCode);
+        return ResponseEntity.ok(entity);
+    }
 	
 	//Add New entry page
 
@@ -100,41 +85,28 @@ public class RecruitmentController
 		
         recservice. createCandidateDetail(candidatedetail);
 		
-		return "Recruitment";
+		return "CloseAndRedirect";
 	}
 	
-	/*
-	 * @PostMapping(path = {"/createCand"}) public String
-	 * createCandidateDetail(Model model)
-	 * 
-	 * { System.out.println("createCand" );
-	 * 
-	 * {
-	 * 
-	 * model.addAttribute("Recruit", new RecruitmentEntity());
-	 * 
-	 * } return "AddCareerOpp"; }
-	 */
+	
+	 
 	 @RequestMapping(path = {"/createCand"})
 	public String createCandidateDetail(Model model)
 							
 	{
-		
 		System.out.println("createCand" );
-
 
                {
         RecruitmentEntity recopp=new RecruitmentEntity();
         RecruitmentEntity savedEntity=recrepo.save(recopp);
         Integer canId=savedEntity.getCandidateid();
+        Integer  candidateid=20000+canId;
             	   
-        recopp.setCandidateid(canId);
+        recopp.setCandidateid(candidateid);
         
 	  model.addAttribute("Recruit", recopp);
 	  
 		}
-		
-		
 		return "AddCareerOpp";
 	
 	}

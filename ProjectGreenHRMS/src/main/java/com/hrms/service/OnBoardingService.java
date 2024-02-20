@@ -1,11 +1,13 @@
 package com.hrms.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hrms.model.CareerOppEntity;
 import com.hrms.model.OnBoardingEntity;
@@ -21,23 +23,13 @@ public class OnBoardingService {
 	RecruitmentRepository  recrepository;
 	
 	@Autowired
-	OnBoardingRepository onboardRepository;
+	OnBoardingRepository onBoardRepository;
 	
-	public RecruitmentEntity getJobByCandidateId(String jodCode) 
-	{
-		System.out.println("getJobById");
-		Optional<RecruitmentEntity> jobdetail = recrepository.findByjobCode(jodCode);
-		
-		if(jobdetail.isPresent()) {
-			return jobdetail.get();
-		}else {
-			return null;
-		}
-	 
-	}
+
+	
 	
 	public List<OnBoardingEntity> getAllRecruitment() {
-		List<OnBoardingEntity> result = (List<OnBoardingEntity>) onboardRepository.findAll();
+		List<OnBoardingEntity> result = (List<OnBoardingEntity>) onBoardRepository.findAll();
 		if (result.size() > 0) {
 			return result;
 
@@ -46,12 +38,17 @@ public class OnBoardingService {
 		}
 	}
 
-	/*
-	 * public void save(OnBoardingEntity list) { // TODO Auto-generated method stub
-	 * 
-	 * }
-	 * 
-	 */
+	public List<RecruitmentEntity> getAllCandidateId(String jodCode){
+		List<RecruitmentEntity> result = recrepository.findByjobCode(jodCode);
+		if (result.size() > 0) {
+			return result;
+
+		} else {
+			return new ArrayList<RecruitmentEntity>();
+		}
+
+	}
+	
 
 
 }

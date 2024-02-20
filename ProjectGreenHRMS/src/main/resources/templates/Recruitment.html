@@ -99,7 +99,7 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 15px;
-  width: 120px;
+  width: 150px;
 }
 label1{
 	 background-color: rgb(0, 128, 192);
@@ -108,9 +108,57 @@ label1{
   color: white;
   border-radius: 8px;
   transition: 0.3s ease-in;
-	
+  
 }
-
+  
+  .form_container_form {
+	   
+            display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+        }
+        
+         th {
+            cursor: pointer;
+        }
+        
+      .form_container_Round2 {
+	   
+            display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+        }
+        
+         th {
+            cursor: pointer;
+        }
+        
+        .form_container_Round3 {
+	   
+            display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+        }
+        
+         th {
+            cursor: pointer;
+        }
+        
+        table{
+   overflow-y:scroll;
+   
+   overflow-x:scroll;
+   height:300px;
+   display:block;
+   }
+   
+        
 </style>
 
   </head>
@@ -123,15 +171,13 @@ label1{
         <br>
     
 <br>
-
  <div>
 
   <label1  for=" ">Job_Code:</label1>
    
-  <select name="career" id="career"  th:onclick="Dropdowns(show{jobCode})"  >
+  <select name="career" id="career"  onchange="fetchDataForDropdown()"  >
       <option
        th:each="career : ${career}" 
-       th:action="@{/show/{jobCode}}" 
        th:text="${career.jobCode}"
        th:value="${career.jobCode}" 
      
@@ -144,23 +190,22 @@ label1{
   
   <br><br>
   
-            
- 	    <form action="" class="form_container" id="formaction" >
+          <form action="" class="form_container" id="formaction" >
 			 		 			  
 			   <br>
 	 <label for="Position"><b> Position</b></label>
-    <input type="text" placeholder="Position" name="position" id="positions"   th:value="${Position}" >
+    <input type="text" placeholder="Position" name="position" id="position" readonly >
     
     
      <label for="Location"><b>Location</b></label>
-    <input type="text" placeholder="Location" name="location" th:value="${Location}" >
+    <input type="text" placeholder="Location" name="location" id="location" readonly>
     
     <label for="Description"><b>Description</b></label>
-    <input type="Description" placeholder="Description" name="description" th:value="${Description}">
+    <input type="Description" placeholder="Description" name="description" id="description" readonly>
     
     
      <label for="Experience"><b>Experience</b></label>
-    <input type="Experience" placeholder="Experience" name="experience" th:value="${experience}" >
+    <input type="Experience" placeholder="Experience" name="experience" id="experience" readonly>
     
    
   </form>
@@ -198,12 +243,15 @@ label1{
 		 
 		  <tr th:each="Recruit : ${Recruit}">
          
-        <td th:text="${Recruit.candidateid}"></td>
-        <td th:text="${Recruit.candidatename}"></td>
+        <td th:text="${Recruit.candidateid}" onclick="toggleForm()" ></td>
+        <td th:text="${Recruit.candidatename}" onclick="toggleForm()" ></td>
         <td th:text="${Recruit.current_location}"></td>
         <td th:text="${Recruit.cand_experience}"></td>
         <td th:text="${Recruit.lastinterview_round}"></td>
         <td th:text="${Recruit.selection_status}"></td>
+        
+     <!--   <td th:text="${Recruit.round_1}"></td>-->
+        
         </tr>
 		 
     </table>
@@ -218,7 +266,72 @@ label1{
     	   </div></div></div>
     	   <br>
     	   
-      
+
+	   <div>
+	<form action="" class="form_container_form" id="formaction">
+			<label1 for=" "><b>Interview Round_1:</b></label1>
+			<br>
+			<br>
+			
+			<label for="candidatename"><b>candidatename</b></label>
+			<input type="text" placeholder="candidatename" name="candidatename" id="candidatename"  th:value="${candidatename}">
+			
+			<label for="Assigned_To"><b> Assigned_To</b></label>
+			<input type="text" placeholder="Assigned_To" name="Assigned_To" id="Assigned_To">
+		
+		
+			<label for="Calendar"><b>Calendar</b></label>
+			<input type="date" placeholder="Calendar" name="Calendar">
+			
+			
+		   <button type="button" onclick="openform()" >select</button>
+		   <button type="button" onclick="toggleForm()">Reject</button>
+		 
+		   </form>
+		   </div>
+		   <br>
+		   <br>
+		
+		<div>
+	<form action="" class="form_container_Round2" id="formaction1">
+			<label1 for=" "><b>Interview Round_2:</b></label1>
+			<br>
+			<br>
+			<label for="Assigned_To"><b> Assigned_To</b></label>
+			<input type="text" placeholder="Assigned_To" name="Assigned_To" id="Assigned_To">
+		
+		
+			<label for="Calendar"><b>Calendar</b></label>
+			<input type="date" placeholder="Calendar" name="Calendar">
+			
+			
+			<button type="button" onclick="openformaction()">select</button>
+			<button type="button" onclick="openform()" >Reject</button>
+			</form>
+			</div>
+			
+			<br>
+			
+			<div>
+	<form action="" class="form_container_Round3" id="formaction1">
+			<label1 for=" "><b>Interview Round_3:</b></label1>
+			<br>
+			<br>
+			<label for="Assigned_To"><b> Assigned_To</b></label>
+			<input type="text" placeholder="Assigned_To" name="Assigned_To" id="Assigned_To">
+		
+		
+			<label for="Calendar"><b>Calendar</b></label>
+			<input type="date" placeholder="Calendar" name="Calendar">
+			
+			
+			<button type="button" onclick="openformaction()"  >select</button>
+			<button type="button" onclick="openformaction()" >Reject</button>
+			</form>
+			</div>
+			
+    	  
+       
     	 	   
     	<script>
 			function openaddcandWindow() {
@@ -236,8 +349,45 @@ label1{
 
 				msgWindow = window.open('createCand', 'popup', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
 			}
-       
-           			
+        	
+        	function fetchDataForDropdown() {
+        var selectedValue = document.getElementById('career').value;
+
+        // Make an AJAX call to the Spring Boot controller to get data based on the selected value
+        fetch('/Recruitment/show/' + selectedValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Update the text fields with the fetched data
+                document.getElementById('position').value = data.position;
+                document.getElementById('location').value = data.location;
+                document.getElementById('description').value = data.description;
+                document.getElementById('experience').value = data.experience;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+        	
+        	  function toggleForm() {
+					const form_container_form = document.querySelector('.form_container_form');
+					form_container_form.style.display = (form_container_form.style.display = 'none') ? 'block' : 'none';
+				}
+				
+				  function openform() {
+					const form_container_Round2 = document.querySelector('.form_container_Round2');
+					form_container_Round2.style.display = (form_container_Round2.style.display == 'none') ? 'block' : 'none';
+				}
+				
+				 function openformaction() {
+					const form_container_Round3 = document.querySelector('.form_container_Round3');
+					form_container_Round3.style.display = (form_container_Round3.style.display == 'none') ? 'block' : 'none';
+				}
+	        			
 		</script>
 
  </body>

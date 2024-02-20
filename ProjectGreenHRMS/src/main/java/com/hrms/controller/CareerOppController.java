@@ -33,7 +33,7 @@ public class CareerOppController {
 
 	@Autowired
 	RecruitmentService recservice;
-
+	
 	@Autowired
 	RecruitmentRepository recrepo;
 
@@ -111,7 +111,7 @@ public class CareerOppController {
 //		service.createOrUpdateJobDetail(jobdetail);
 		  recservice.createCandidateDetail(candidatedetail);
 		
-		return "index1";
+		return "CloseAndRedirect";
 	}
 	
 	/*
@@ -127,7 +127,7 @@ public class CareerOppController {
 	 * return "AddCareerOpp"; }
 	 */
 	
-	@RequestMapping(path = {"/createCand"})
+	 @RequestMapping(path = {"/createCand"})
 	public String createCandidateDetail(Model model)
 							
 	{
@@ -140,12 +140,14 @@ public class CareerOppController {
         RecruitmentEntity savedEntity=recrepo.save(recopp);
         Integer canId=savedEntity.getCandidateid();
             	   
-        recopp.setCandidateid(canId);
+        Integer  candidateid=20000+canId;
+ 	   
+        recopp.setCandidateid(candidateid);
         
 	  model.addAttribute("Recruit", recopp);
 	  
 		}
-		
+				
 		return "AddCareerOpp";
 	
 	}

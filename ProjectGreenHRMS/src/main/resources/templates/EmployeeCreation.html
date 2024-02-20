@@ -1,76 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
- 
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>EmployeeCreation</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-	<link rel="stylesheet" href="styles.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EmployeeCreation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="styles.css" />
 </head>
- 
+
 <body>
- 
-	<form>
-		<div>
- 
-			<br>
-			<label for="employeeName">Employee ID:</label>
-			<button type="button" id="employeeNameButton">Select Employee ID</button>
-			<br>
- 
-			<label for="jobCode">ID Proof:</label>
-			<button type="button" id="jobCodeButton">Select ID Proof</button>
- 
-			<br>
- 
-			<label for="employeeId">Photograph:</label>
-			<button type="button" id="employeeIdButton">Select Photograph</button>
- 
-			<br>
-			<br>
- 
-			<label for="joiningDate">Date of Joining:</label>
-			<input type="date" id="joiningDate" name="joiningDate" required>
- 
-			<br>
- 
+    <div>
+        <form id="fileUploadForm"  th:action="@{/upload}" method="post" enctype="multipart/form-data"
+            th:object="${OnBoard}">
+            <div>
+                <div class="form-group col-md-8">
+                    <br>
+                    <label for="employeeId">Employee ID:</label>
+                    <input type="text" th:field="*{empolyeeId}" id="employeeId" placeholder="Employee ID" readonly />
+                </div>
+
+                <div class="form-group col-md-8">
+                    <label for="idProof">Upload ID Proof:</label>
+                    <input type="file" th:field="*{idProofpath}" accept=".pdf, .jpg, .png" required />
+                </div>
+
+                <div class="form-group col-md-8">
+                    <label for="photograph">Photograph:</label>
+                    <input type="file" th:field="*{photographPath}" accept=".jpg, .png" required />
+                </div>
+
+                <!-- Add other form fields for dateOfJoining, level, backgroundCheckStatus, probationPeriod, relivingLetterPath -->
+                  <div class="form-group col-md-8">
+			<label for="joiningDate">Date of Joining:</label> 
+			<input type="date" th:field="*{dateOfJoining}"  id="joiningDate" placeholder="joiningDate" required>
+			</div>
+			
+               <div class="form-group col-md-8">
 			<label for="level">Level:</label>
-			<select id="level" name="level">
+			<select id="level" th:field="*{level}" name="level">
 				<option value="level1">Level 1</option>
 				<option value="level2">Level 2</option>
 				<option value="level3">Level 3</option>
 				<!-- Add more levels as needed -->
 			</select>
-			<br>
- 
+			</div>
+            
+            <div class="form-group col-md-8">
 			<label for="level">Background Check Status:</label>
-			<select id="Bk_Status" name="level">
+			<select id="Bk_Status" th:field="*{backgroundCheckStatus}" name="level">
 				<option value="initialize">initialize</option>
 				<option value="Cleared">Cleared</option>
 				<option value="Rejected">Rejected</option>
- 
 			</select>
- 
+			</div>
+           
+           <div class="form-group col-md-8">
 			<label for="level">Probation Peiod Status:</label>
-			<select id="PP_Status" name="level">
-				<option value="Under Problem">Under Probation</option>
+			<select id="PP_Status" th:field="*{probationPeriod}" name="level">
+				<option value="Under Problem">Probation</option>
 				<option value="confirmed">confirmed</option>
 			</select>
- 
- 
-			<label for="Reliving&Exp">Reliving & Experince:</label>
-			<button type="button" id="Rel_And_exp">Upload</button>
- 
-			<br>
- 
-			<button type="submit">Submit</button>
- 
-			<br>
-	</form>
-	</div>
+            </div>
+            
+            <div class="form-group col-md-8">
+			<label for="relivingLetter">Reliving & Experince:</label>
+			<input type="file" th:field="*{relivingLetterPath}" accept=".pdf" required>
+			</div>
+                  
+                  
+                <div class="form-group col-md-8">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
- 
+
 </html>

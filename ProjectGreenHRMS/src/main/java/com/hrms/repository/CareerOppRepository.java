@@ -1,5 +1,6 @@
 package com.hrms.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +11,5 @@ import com.hrms.model.CareerOppEntity;
 
 @Repository
 public interface CareerOppRepository extends JpaRepository<CareerOppEntity, Integer>{
-	Optional<CareerOppEntity> findByjobCode(String jobCode);
+	CareerOppEntity findByjobCode(String jobCode);
 }

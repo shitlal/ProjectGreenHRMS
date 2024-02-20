@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
-<html lang="en">
- 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,22 +14,22 @@
 			border: 1px solid white;
 			border-collapse: collapse;
 		}
- 
+
 		th,
 		td {
 			background-color: #96D4D4;
 		}
- 
+
 		select {
 			border: none;
 			padding: 10px 20px;
 			border-radius: 5px;
 		}
- 
+
 		select:focus {
 			outline: none;
 		}
- 
+
 		button {
 			padding: 10px;
 			margin-bottom: 10px;
@@ -40,86 +39,112 @@
 			border-radius: 4px;
 			cursor: pointer;
 		}
- 
+
 		button:hover {
 			background-color: #2a5298;
 		}
- 
+
 		button[type="submit"] {
 			background-color: #34a853;
 		}
- 
+
 		button[type="submit"]:hover {
 			background-color: #2e8a4e;
 		}
 	</style>
- 
+
 </head>
- 
+
 <body>
 	<div class="container">
 		<br>
 		<h1><i>On Boarding</i>
- 
+
 		</h1>
 		<form action="">
- 
- 
- 
-			<div class="button_container">
+
+
+
+		 <div class="button_container">
 				<label class="col-form-label" for="jobs">Job Code : </label>
  
-				<select id="jobCode" >
-					<option th:each="career : ${career}" 
-					th:value="${career.jobCode}" 
-					th:text="${career.jobCode}">
-					</option>
-				</select>
+				
+				<select id="firstDropdown" th:value="*{selectedValue}" onchange="fetchSecondDropdownValues()">
+    <option th:each="career : ${career}" th:value="${career.jobCode}" th:text="${career.jobCode}">Option 1</option>
+</select>
 			</div>
  
 			<div class="button_container">
 				<label class="col-form-label" for="candId">Candidate ID : </label>
  
-				<select name="candId" id="candId"  >
-					<option th:each="career : ${career}" th:value="${career.jobCode}" th:text="${career.jobCode}">
-					</option>
-				</select>
+				
+				
+				<select id="secondDropdown" th:value=="*{secondSelectedValue}">
+    <option th:each="Recruit : ${Recruit}" th:value="${Recruit.candidateid}" th:text="${Recruit.candidateid}">SubOption 1</option>
+</select>
+			
 			</div>
 			<br>
- 
+
 			<label for="employeeId"> </label>
 			<button id="myButton" onClick="openWindow1()">
 				Create Employee
 			</button>
 			<br>
- 
+
 			<!--	<button type="submit">Submit</button>
 			<br>-->
-		
+
 		</form>
 	</div>
 	<script>
-		
-		
 		function openWindow1() {
-			var w = 520, h = 360;
- 
+			var w = 500, h = 400;
+
 			if (document.getElementById) {
 				w = screen.availWidth;
 				h = screen.availHeight;
 			}
- 
+
 			var popW = 700, popH = 500;
- 
+
 			var leftPos = (w - popW) / 2;
 			var topPos = (h - popH) / 2;
- 
+
 			msgWindow = window.open('EmpCreation', 'popup', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
 			window.close();
 		}
+
+		function fetchSecondDropdownValues() {
+        var selectedValue = document.getElementById('firstDropdown').value;
+
+        // Make an AJAX call to the Spring Boot controller to get values for the second dropdown
+        fetch('/search/' + selectedValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(Recruit => {
+                // Populate the second dropdown with the fetched values
+                var secondDropdown = document.getElementById('secondDropdown');
+                secondDropdown.innerHTML = '';
+
+                Recruit.forEach(Recruit => {
+                    var option = document.createElement('option');
+                    option.value = Recruit.candidateid;
+                    option.text = Recruit.candidateid;
+                    secondDropdown.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }  
 	</script>
- 
- 
+
+
 </body>
- 
+
 </html>

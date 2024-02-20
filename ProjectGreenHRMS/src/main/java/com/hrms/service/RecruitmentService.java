@@ -33,24 +33,11 @@ public class RecruitmentService
 		}
 	}
 
-	public CareerOppEntity getByJobCode(String jobCode) {
-		{
-			System.out.println("getJobByjobCode");
-			
-			Optional<CareerOppEntity> jobdetails= Crepository.findByjobCode(jobCode);
+	public CareerOppEntity getByJobCode(String jodCode){
+		CareerOppEntity result = Crepository.findByjobCode(jodCode);
+			return result;
 
-			if (jobdetails.isPresent()) 
-				
-			{
-				return jobdetails.get();
-			} 
-			else 
-			{
-				return null ;
-			}
 		
-	}
-	
 	}
 	//-----------------------------------------------
 

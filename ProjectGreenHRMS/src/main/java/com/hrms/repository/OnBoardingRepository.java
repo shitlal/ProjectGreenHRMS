@@ -8,6 +8,6 @@ import com.hrms.model.CareerOppEntity;
 import com.hrms.model.OnBoardingEntity;
 
 @Repository
-public interface OnBoardingRepository extends JpaRepository<OnBoardingEntity, Long>{
+public interface OnBoardingRepository extends JpaRepository<OnBoardingEntity, Integer>{
 
 }

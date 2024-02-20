@@ -16,6 +16,6 @@ import org.springframework.data.repository.kotlin.CoroutineCrudRepository;
 public interface RecruitmentRepository extends JpaRepository<RecruitmentEntity, Integer>
 {
 
-	Optional<RecruitmentEntity> findByjobCode(String jobCode);
+	List<RecruitmentEntity> findByjobCode(String jobCode);
 
 }
