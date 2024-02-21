@@ -106,9 +106,9 @@ public class OnBoardingController {
 		
 		
 		// Save files to the file system
-		String idProofPath = saveFile(idProof, "idProof");
-		String photographPath = saveFile(photograph, "photograph");
-		String relivingLetterPath = saveFile(relivingLetter, "relivingLetter");
+		String idProofPath = saveFile(idProof, "idProof", EmpolyeeId);
+		String photographPath = saveFile(photograph, "photograph", EmpolyeeId);
+		String relivingLetterPath = saveFile(relivingLetter, "relivingLetter", EmpolyeeId);
 		
 
 		// Set file paths in the OnBoardingEntity
@@ -126,17 +126,35 @@ public class OnBoardingController {
 		// Save OnBoardingEntity to the database
 		onBoardingRepository.save(onBoardingEntity);
 
-		return ResponseEntity.ok("Files uploaded successfully!");
+		 return ResponseEntity.ofNullable("Files uploaded successfully!");
 	}
 
-	private String saveFile(MultipartFile file, String fileType) {
-		String filePath = fileUploadPath + File.separator + fileType + File.separator + file.getOriginalFilename();
-		try {
-			Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return filePath;
+	
+	private String saveFile(MultipartFile file, String fileType, Integer employeeId) {
+	    String employeeFolderPath = fileUploadPath + File.separator + "Employee_" + employeeId;
+	    File employeeFolder = new File(employeeFolderPath);
+	    if (!employeeFolder.exists()) {
+	        employeeFolder.mkdirs(); // Create employee directory if it doesn't exist
+	    }
+ 
+	    // Dynamically create folder for the file type
+	    String fileTypeFolder = employeeFolderPath + File.separator + fileType;
+	    File fileTypeDir = new File(fileTypeFolder);
+	    if (!fileTypeDir.exists()) {
+	        fileTypeDir.mkdirs(); // Create folder for file type if it doesn't exist
+	    }
+ 
+	    String filePath = fileTypeFolder + File.separator + file.getOriginalFilename();
+	    try {
+	        // Create file within the employee ID directory
+	        File newFile = new File(filePath);
+	        newFile.createNewFile(); // Create the file
+	        // Save file content
+	        Files.copy(file.getInputStream(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return filePath;
 	}
 	
 }

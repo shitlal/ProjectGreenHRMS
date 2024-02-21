@@ -33,6 +33,15 @@ public class RecruitmentService
 		}
 	}
 
+	public List<RecruitmentEntity> getAllRecruitmentByJobCode(String jobCode) {
+		List<RecruitmentEntity> result =  repository.findByjobCode(jobCode);
+		if (result.size() > 0) {
+			return result;
+
+		} else {
+			return new ArrayList<RecruitmentEntity>();
+		}
+	}
 	public CareerOppEntity getByJobCode(String jodCode){
 		CareerOppEntity result = Crepository.findByjobCode(jodCode);
 			return result;

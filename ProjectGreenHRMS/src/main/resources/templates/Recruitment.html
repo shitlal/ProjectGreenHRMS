@@ -176,6 +176,7 @@ label1{
   <label1  for=" ">Job_Code:</label1>
    
   <select name="career" id="career"  onchange="fetchDataForDropdown()"  >
+	  <option>select</option>
       <option
        th:each="career : ${career}" 
        th:text="${career.jobCode}"
@@ -222,7 +223,7 @@ label1{
                 <div th:case="*">
 
   
-   <table style="width:100%">
+   <table id="candTable" style="width:100%; display: none;">
   <tr class="header">
    <th style="width:10%;" >candidateid</th>
     <th style="width:10%;">candidatename</th>
@@ -241,7 +242,7 @@ label1{
     <td>01</td>
     <td>-->
 		 
-		  <tr th:each="Recruit : ${Recruit}">
+		  <tr th:each="Recruit : ${Recruit1}">
          
         <td th:text="${Recruit.candidateid}" onclick="toggleForm()" ></td>
         <td th:text="${Recruit.candidatename}" onclick="toggleForm()" ></td>
@@ -352,7 +353,7 @@ label1{
         	
         	function fetchDataForDropdown() {
         var selectedValue = document.getElementById('career').value;
-
+		document.getElementById('candTable').style.display='block';
         // Make an AJAX call to the Spring Boot controller to get data based on the selected value
         fetch('/Recruitment/show/' + selectedValue)
             .then(response => {

@@ -70,6 +70,7 @@
  
 				
 				<select id="firstDropdown" th:value="*{selectedValue}" onchange="fetchSecondDropdownValues()">
+					<option>select</option>
     <option th:each="career : ${career}" th:value="${career.jobCode}" th:text="${career.jobCode}">Option 1</option>
 </select>
 			</div>

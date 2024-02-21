@@ -72,10 +72,21 @@
                   
                   
                 <div class="form-group col-md-8">
-                    <button type="submit">Submit</button>
+                    <button type="button" onclick="uploadFiles()">Submit</button>
                 </div>
             </div>
         </form>
+        
+        <script>
+		function uploadFiles() {
+			// Submit the form when the button is clicked
+			
+			document.getElementById("fileUploadForm").submit();
+			window.alert("Files uploaded successfully!");
+			 
+	
+		}
+	</script>
     </div>
 </body>
 

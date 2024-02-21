@@ -73,6 +73,9 @@ public class RecruitmentController
     public ResponseEntity<CareerOppEntity> getByJobCode(Model model, @PathVariable("jobCode") String jobCode) {
         // Your logic to fetch data based on the selected value
 		CareerOppEntity entity = recservice.getByJobCode(jobCode);
+		List<RecruitmentEntity> list = recservice.getAllRecruitmentByJobCode(jobCode);
+		int count = list.size();
+		model.addAttribute("Recruit1", list);
         return ResponseEntity.ok(entity);
     }
 	
