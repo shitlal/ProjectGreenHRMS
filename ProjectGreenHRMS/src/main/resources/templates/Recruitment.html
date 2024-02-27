@@ -150,11 +150,20 @@ label1{
             cursor: pointer;
         }
         
+    .Interview_Final_Status{
+			  display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+			
+		}
+        
         table{
    overflow-y:scroll;
    
    overflow-x:scroll;
-   height:300px;
+   height:200px;
    display:block;
    }
    
@@ -224,6 +233,7 @@ label1{
 
   
    <table id="candTable" style="width:100%; display: none;">
+	    <thead>
   <tr class="header">
    <th style="width:10%;" >candidateid</th>
     <th style="width:10%;">candidatename</th>
@@ -233,7 +243,7 @@ label1{
        <th style="width:20%;">selection_status</th>
                   </tr>
   
-
+</thead>
     <!--<td>01</td>
     <td>C013677</td>
      <td>Java Developer</td>
@@ -241,8 +251,10 @@ label1{
     <td>Mumbai</td>
     <td>01</td>
     <td>-->
-		 
-		  <tr th:each="Recruit : ${Recruit1}">
+		 <tbody>
+        <!-- Table content will be dynamically updated here -->
+    </tbody>
+		  <!--<tr th:each="Recruit : ${Recruit1}">
          
         <td th:text="${Recruit.candidateid}" onclick="toggleForm()" ></td>
         <td th:text="${Recruit.candidatename}" onclick="toggleForm()" ></td>
@@ -251,9 +263,9 @@ label1{
         <td th:text="${Recruit.lastinterview_round}"></td>
         <td th:text="${Recruit.selection_status}"></td>
         
-     <!--   <td th:text="${Recruit.round_1}"></td>-->
+        <td th:text="${Recruit.round_1}"></td>
         
-        </tr>
+        </tr>-->
 		 
     </table>
     
@@ -275,7 +287,7 @@ label1{
 			<br>
 			
 			<label for="candidatename"><b>candidatename</b></label>
-			<input type="text" placeholder="candidatename" name="candidatename" id="candidatename"  th:value="${candidatename}">
+			<input type="text" placeholder="candidatename" name="candidatename" id="candidatename"  >
 			
 			<label for="Assigned_To"><b> Assigned_To</b></label>
 			<input type="text" placeholder="Assigned_To" name="Assigned_To" id="Assigned_To">
@@ -287,6 +299,7 @@ label1{
 			
 		   <button type="button" onclick="openform()" >select</button>
 		   <button type="button" onclick="toggleForm()">Reject</button>
+		   <button type="button" onclick="FinalStatus()">Final Select</button>
 		 
 		   </form>
 		   </div>
@@ -308,6 +321,7 @@ label1{
 			
 			<button type="button" onclick="openformaction()">select</button>
 			<button type="button" onclick="openform()" >Reject</button>
+			 <button type="button" onclick="FinalStatus()">Final Select</button>
 			</form>
 			</div>
 			
@@ -328,6 +342,20 @@ label1{
 			
 			<button type="button" onclick="openformaction()"  >select</button>
 			<button type="button" onclick="openformaction()" >Reject</button>
+			 <button type="button" onclick="FinalStatus()">Final Select</button>
+			</form>
+			</div>
+			
+			
+					<div>
+	        <form action="" class="Interview_Final_Status" id="formaction1">
+			<label1 for=" "><b>Interview_Final_Status:</b></label1>
+			<br>
+			<br>
+	
+			<button type="button"  >selected</button>
+			<button type="button"  >Rejected</button>
+			
 			</form>
 			</div>
 			
@@ -368,15 +396,100 @@ label1{
                 document.getElementById('location').value = data.location;
                 document.getElementById('description').value = data.description;
                 document.getElementById('experience').value = data.experience;
+                updateTableContent(selectedValue);
             })
             .catch(error => {
                 console.error('Error:', error);
             });
     }
-        	
-        	  function toggleForm() {
+        	function updateTableContent(selectedValue) {
+        
+		fetch('/Recruitment/getCandData/' + selectedValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(listCand => {
+                // Update the table content
+                var tableBody = document.getElementById('candTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+
+                listCand.forEach(entity => {
+                    var row = tableBody.insertRow(tableBody.rows.length);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					var cell6 = row.insertCell(5);
+
+                    cell1.innerHTML = entity.candidateid;
+                    cell2.innerHTML = entity.candidatename;
+					cell3.innerHTML = entity.current_location;
+                    cell4.innerHTML = entity.cand_experience;
+					cell5.innerHTML = entity.lastinterview_round;
+                    cell6.innerHTML = entity.selection_status
+					 row.addEventListener('click', function() {
+                        // Handle row click, you can update the container content here
+                        toggleForm(entity.candidateid);
+                    });
+                    // Add additional cells as needed
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    
+        	  function toggleForm(selectedCandId) {
+				 
+				  	const form_container_form = document.querySelector('.form_container_form');
+					form_container_form.style.display = (form_container_form.style.display = 'none') ? 'block' : 'none';
+					 fetch('/Recruitment/interview/' + selectedCandId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text(); // Assuming the response is a plain text value
+            })
+            .then(candName => {
+                // Update the input tag in the container with the fetched additional information
+                var candidatename = document.getElementById('candidatename');
+                candidatename.value = candName;
+                // You can customize this based on your requirements.
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+				  
+				}
+	function showForms(selectedValue)
+        	   {
 					const form_container_form = document.querySelector('.form_container_form');
 					form_container_form.style.display = (form_container_form.style.display = 'none') ? 'block' : 'none';
+									
+		 var selectedValue = document.getElementById('Recruit').value;
+
+        // Make an AJAX call to the Spring Boot controller to get data based on the selected value
+        
+        fetch('/Recruitment/interview/' + selectedValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Update the text fields with the fetched data
+                document.getElementById('candidatename').value = data.candidatename;
+            
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+					
 				}
 				
 				  function openform() {
@@ -388,7 +501,12 @@ label1{
 					const form_container_Round3 = document.querySelector('.form_container_Round3');
 					form_container_Round3.style.display = (form_container_Round3.style.display == 'none') ? 'block' : 'none';
 				}
-	        			
+	        	function FinalStatus()
+				{
+					const Interview_Final_Status = document.querySelector('.Interview_Final_Status');
+					Interview_Final_Status.style.display = (Interview_Final_Status.style.display == 'none') ? 'block' : 'none';
+				}
+						
 		</script>
 
  </body>

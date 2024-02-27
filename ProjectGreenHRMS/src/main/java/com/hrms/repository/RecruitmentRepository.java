@@ -10,12 +10,13 @@ import com.hrms.model.CareerOppEntity;
 import com.hrms.model.RecruitmentEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.kotlin.CoroutineCrudRepository;
 
 @Repository
 public interface RecruitmentRepository extends JpaRepository<RecruitmentEntity, Integer>
 {
 
 	List<RecruitmentEntity> findByjobCode(String jobCode);
+	RecruitmentEntity findBycandidateid(Integer candidateid);
+	
 
 }

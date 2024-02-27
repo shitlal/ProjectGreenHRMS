@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrms.model.CareerOppEntity;
+import com.hrms.model.OnBoardingEntity;
 import com.hrms.model.RecruitmentEntity;
 import com.hrms.repository.RecruitmentRepository;
 import com.hrms.service.CareerOppService;
+import com.hrms.service.OnBoardingService;
 import com.hrms.service.RecruitmentService;
 
 @Controller
@@ -35,6 +37,10 @@ public class RecruitmentController
 	@Autowired
 	RecruitmentRepository recrepo;
 
+	@Autowired
+	OnBoardingService Onboardingservice;
+	
+	
 	@RequestMapping()
 	public String getAllCareerOpp(Model model) {
 //			System.out.println("getAllCareerOpp");
@@ -73,12 +79,18 @@ public class RecruitmentController
     public ResponseEntity<CareerOppEntity> getByJobCode(Model model, @PathVariable("jobCode") String jobCode) {
         // Your logic to fetch data based on the selected value
 		CareerOppEntity entity = recservice.getByJobCode(jobCode);
-		List<RecruitmentEntity> list = recservice.getAllRecruitmentByJobCode(jobCode);
-		int count = list.size();
-		model.addAttribute("Recruit1", list);
+		
         return ResponseEntity.ok(entity);
     }
 	
+	@GetMapping(path = { "getCandData/{jobCode}" })
+	@ResponseBody
+	    public ResponseEntity<List<RecruitmentEntity>> getCandidateData(Model model, @PathVariable("jobCode") String jobCode){
+	        // Your logic to fetch table data based on the selected value of the first dropdown
+		List<RecruitmentEntity> listCand = recservice.getAllRecruitmentByJobCode(jobCode);
+		
+	        return ResponseEntity.ok(listCand);
+	    }
 	//Add New entry page
 
 	@RequestMapping(path = "/addCandidates")
@@ -113,9 +125,84 @@ public class RecruitmentController
 		return "AddCareerOpp";
 	
 	}
+	 
+	 // Show data in interview Rounds
+		
+		/*
+		 * @GetMapping(path = { "interview/{candidatename}" })
+		 * 
+		 * @ResponseBody public ResponseEntity<RecruitmentEntity>
+		 * openInterviewBycandidatename(Model model, @PathVariable("candidatename")
+		 * String candidatename) { // Your logic to fetch data based on the selected
+		 * value RecruitmentEntity entity =
+		 * recservice.openInterviewBycandidatename(candidatename); return
+		 * ResponseEntity.ok(entity); }
+		 */
+		@GetMapping("interview/{candidateid}")
+	    @ResponseBody
+	    public ResponseEntity<String> openInterviewBycandidatename(Model model, @PathVariable("candidateid") Integer candidateid) {
+	        // Your logic to fetch additional information based on the selected entity ID
+	        String candName = recservice.openInterviewBycandidatename(candidateid);
+	        return ResponseEntity.ok(candName);
+	    }
+	// Show employeeID data
+		
+@GetMapping(path = {"Fetch/{EmployeeId}" })
+
+public String getByEmployeeId(Model model, @PathVariable("employeeId") Optional<Integer> employeeId) 
+
+{
+	if (employeeId.isPresent()) 
+	{
+		System.out.println(employeeId);
+		
+		OnBoardingEntity entity = recservice.getByEmployeeId(employeeId.get());
+		 model.addAttribute("onboard", entity); 
+		 
+	    model.addAttribute("employeeId", entity.getEmployeeId()); 
+	
+			
 	}
 	
+	return "Recruitment";
+}
 
+}
+
+	 
+	 
+	 
+	/*
+	 * @RequestMapping("/interview/{candidatename}") public String
+	 * openInterviewBycandidatename(Model model, @PathVariable("candidatename")
+	 * Optional<String> candidatename)
+	 * 
+	 * {
+	 * 
+	 * System.out.println("openInterviewBycandidatename" + candidatename); if
+	 * (candidatename.isPresent()) {
+	 * 
+	 * RecruitmentEntity entity =
+	 * recservice.openInterviewBycandidatename(candidatename.get());
+	 * model.addAttribute("Recruit", entity); model.addAttribute("candidatename",
+	 * entity.getCandidatename());
+	 * 
+	 * // System.out.println(entity.getCandidatename());
+	 * 
+	 * // Pass the Candidatenames to the view
+	 * 
+	 * // RecruitmentEntity recopp = new RecruitmentEntity(); // //
+	 * RecruitmentEntity savedEntity = recrepo.save(recopp); // String canName =
+	 * savedEntity.getCandidatename(); // recopp.setCandidatename(canName); //
+	 * model.addAttribute(" Recruit", recopp);
+	 * 
+	 * }
+	 * 
+	 * return "Recruitment"; }
+	 */
+	
+	
+	
 
 
 

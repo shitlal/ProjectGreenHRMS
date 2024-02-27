@@ -19,7 +19,7 @@ public class OnBoardingEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PG_ONBOARDING_DETAIL_SEQ")
 	@Column(name = "EMPLOYEEID")
-	private Integer EmpolyeeId;
+	private Integer employeeId;
 
 	@Column(name = "DATEOFJOINING")
 	private Date DateOfJoining;
@@ -47,10 +47,10 @@ public class OnBoardingEntity {
 
 	}
 
-	public OnBoardingEntity(Integer empolyeeId, Date dateOfJoining, String level, String backgroundCheckStatus,
+	public OnBoardingEntity(Integer employeeId, Date dateOfJoining, String level, String backgroundCheckStatus,
 			String probationPeriod, String idProofpath, String photographPath, String relivingLetterPath) {
 		super();
-		this.EmpolyeeId = empolyeeId;
+		this.employeeId = employeeId;
 		this.DateOfJoining = dateOfJoining;
 		this.Level = level;
 		this.BackgroundCheckStatus = backgroundCheckStatus;
@@ -60,12 +60,12 @@ public class OnBoardingEntity {
 		this.relivingLetterPath = relivingLetterPath;
 	}
 
-	public Integer getEmpolyeeId() {
-		return EmpolyeeId;
+	public Integer getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setEmpolyeeId(Integer empolyeeId) {
-		EmpolyeeId = empolyeeId;
+	public void setEmployeeId(Integer employeeId) {
+		employeeId = employeeId;
 	}
 
 	public Date getDateOfJoining() {
@@ -126,7 +126,7 @@ public class OnBoardingEntity {
 
 	@Override
 	public String toString() {
-		return "OnBoardingEntity [EmpolyeeId=" + EmpolyeeId + ", DateOfJoining=" + DateOfJoining + ", Level=" + Level
+		return "OnBoardingEntity [employeeId=" + employeeId + ", DateOfJoining=" + DateOfJoining + ", Level=" + Level
 				+ ", BackgroundCheckStatus=" + BackgroundCheckStatus + ", ProbationPeriod=" + ProbationPeriod
 				+ ", IdProofpath=" + IdProofpath + ", photographPath=" + photographPath + ", relivingLetterPath="
 				+ relivingLetterPath + "]";

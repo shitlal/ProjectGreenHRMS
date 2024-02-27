@@ -85,11 +85,11 @@ public class OnBoardingController {
 		OnBoardingEntity onBoardingEntity = new OnBoardingEntity();
 
 		OnBoardingEntity savedEntity = onBoardingRepository.save(onBoardingEntity);
-		Integer empId = savedEntity.getEmpolyeeId();
+		Integer empId = savedEntity.getEmployeeId();
 
 		// Pass the generated ID to the view
 
-		onBoardingEntity.setEmpolyeeId(empId);
+		onBoardingEntity.setEmployeeId(empId);
 		model.addAttribute("OnBoard", onBoardingEntity); // Assuming OnBoardingEntity is your form model
 		return "EmployeeCreation";
 	}
@@ -114,7 +114,7 @@ public class OnBoardingController {
 		// Set file paths in the OnBoardingEntity
 		OnBoardingEntity onBoardingEntity = new OnBoardingEntity();
 
-		onBoardingEntity.setEmpolyeeId(EmpolyeeId);
+		onBoardingEntity.setEmployeeId(EmpolyeeId);
 		onBoardingEntity.setDateOfJoining(DateOfJoining);
 		onBoardingEntity.setLevel(Level);
 		onBoardingEntity.setBackgroundCheckStatus(BackgroundCheckStatus);

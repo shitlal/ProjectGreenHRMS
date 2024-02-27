@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrms.model.CareerOppEntity;
+import com.hrms.model.OnBoardingEntity;
 import com.hrms.model.RecruitmentEntity;
 import com.hrms.repository.CareerOppRepository;
+import com.hrms.repository.OnBoardingRepository;
 import com.hrms.repository.RecruitmentRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class RecruitmentService
 	
 	@Autowired
 	CareerOppRepository Crepository;
+	
+	@Autowired
+	OnBoardingRepository onBoardRepository;
 	
 
 	public List<RecruitmentEntity> getAllRecruitment() {
@@ -64,4 +69,39 @@ public class RecruitmentService
 		
 			
 }
+//	public RecruitmentEntity openInterviewBycandidatename(String candidatename)
+//	{
+//		// TODO Auto-generated method stub
+//		RecruitmentEntity details = repository.findBycandidatename(candidatename) ;
+//		String candName=details.getCandidatename();
+//		return details;
+//	}
+	public String openInterviewBycandidatename(Integer candidateid) {
+		RecruitmentEntity details = repository.findBycandidateid(candidateid) ;
+		String candName=details.getCandidatename();
+        return candName;
+    }
+	public OnBoardingEntity getByEmployeeId(Integer employeeId) {
+		// TODO Auto-generated method stub
+		OnBoardingEntity details = onBoardRepository.findByEmployeeId(employeeId) ;
+		
+		
+		return details;
+	}
+
 }
+/*
+ * public RecruitmentEntity openInterviewBycandidatename(String candidatename) {
+ * // TODO Auto-generated method stub
+ * System.out.println("openInterviewBycandidatename");
+ * 
+ * Optional<RecruitmentEntity> details =
+ * repository.findBycandidatename(candidatename);
+ * System.out.println("openInterviewBycandidatename22");
+ * 
+ * if(details.isPresent()) { return details.get(); } else {
+ * 
+ * return null; } }
+ */
+
+

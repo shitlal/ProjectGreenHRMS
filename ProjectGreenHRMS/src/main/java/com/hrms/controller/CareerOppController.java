@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/Career")
 public class CareerOppController {
 	
 	@Autowired
