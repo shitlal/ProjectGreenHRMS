@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.hrms.model.RecruitmentEntity;
 import com.hrms.model.CareerOppEntity;
@@ -16,9 +15,6 @@ import com.hrms.repository.CareerOppRepository;
 import com.hrms.repository.RecruitmentRepository;
 import com.hrms.service.CareerOppService;
 import com.hrms.service.RecruitmentService;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -50,15 +46,6 @@ public class CareerOppController {
 		return "index1";
 	}
 	
-//	@RequestMapping("/delete/{id}")
-//	public String deleteJobByJobCode(Model model, @PathVariable("id") Integer id) {
-//		
-//		System.out.println("deleteJobByJobCode");
-//		
-//		service.deleteJobById(id);
-//		return "redirect:/";
-//		
-//	}
 	
 	@GetMapping("/delete/{id}")
     public String deleteEntity(@PathVariable Integer id) {
@@ -108,34 +95,17 @@ public class CareerOppController {
 	{
 		System.out.println("CandidatesDetail ");
 		
-//		service.createOrUpdateJobDetail(jobdetail);
 		  recservice.createCandidateDetail(candidatedetail);
 		
 		return "CloseAndRedirect";
 	}
 	
-	/*
-	 * @RequestMapping(path = {"/createCand"}) public String
-	 * createCandidateDetail(Model model)
-	 * 
-	 * {
-	 * 
-	 * System.out.println("createCand" );
-	 * 
-	 * { model.addAttribute("Recruit", new RecruitmentEntity()); }
-	 * 
-	 * return "AddCareerOpp"; }
-	 */
 	
 	 @RequestMapping(path = {"/createCand"})
 	public String createCandidateDetail(Model model)
 							
 	{
-		
 		System.out.println("createCand" );
-
-
-               {
         RecruitmentEntity recopp=new RecruitmentEntity();
         RecruitmentEntity savedEntity=recrepo.save(recopp);
         Integer canId=savedEntity.getCandidateid();
@@ -145,9 +115,7 @@ public class CareerOppController {
         recopp.setCandidateid(candidateid);
         
 	  model.addAttribute("Recruit", recopp);
-	  
-		}
-				
+	 			
 		return "AddCareerOpp";
 	
 	}

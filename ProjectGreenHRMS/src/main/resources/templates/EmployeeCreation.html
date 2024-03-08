@@ -18,9 +18,14 @@
             <div>
                 <div class="form-group col-md-8">
                     <br>
-                    <label for="employeeId">Employee ID:</label>
-                    <input type="text" th:field="*{empolyeeId}" id="employeeId" placeholder="Employee ID" readonly />
+                    <label for="employeeId"></label>
+                    <input type="hidden" th:field="*{employeeId}" id="employeeId" placeholder="Employee ID" readonly />
                 </div>
+                <diV>
+                <label for="employeeCode">Employee ID:</label>
+				<input type="text" id="employeeCode" th:field="*{employeeCode}" th:value="${OnBoardlatest}">
+			</div>
+
 
                 <div class="form-group col-md-8">
                     <label for="idProof">Upload ID Proof:</label>
@@ -32,7 +37,7 @@
                     <input type="file" th:field="*{photographPath}" accept=".jpg, .png" required />
                 </div>
 
-                <!-- Add other form fields for dateOfJoining, level, backgroundCheckStatus, probationPeriod, relivingLetterPath -->
+      
                   <div class="form-group col-md-8">
 			<label for="joiningDate">Date of Joining:</label> 
 			<input type="date" th:field="*{dateOfJoining}"  id="joiningDate" placeholder="joiningDate" required>
@@ -44,7 +49,7 @@
 				<option value="level1">Level 1</option>
 				<option value="level2">Level 2</option>
 				<option value="level3">Level 3</option>
-				<!-- Add more levels as needed -->
+				
 			</select>
 			</div>
             
@@ -75,6 +80,8 @@
                     <button type="button" onclick="uploadFiles()">Submit</button>
                 </div>
             </div>
+          
+            
         </form>
         
         <script>
@@ -84,8 +91,16 @@
 			document.getElementById("fileUploadForm").submit();
 			window.alert("Files uploaded successfully!");
 			 
+			 setTimeout(function () 
+			 {
+			window.location.href = "CloseAndRedirect";
+			
+		}, 2000); // Redirect after 2 seconds (2000 milliseconds)
 	
 		}
+
+
+
 	</script>
     </div>
 </body>

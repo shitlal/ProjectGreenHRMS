@@ -1,7 +1,7 @@
 package com.hrms.model;
-
+ 
 import java.util.Date;
-
+ 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,55 +9,60 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-
+ 
 @Entity
-
+ 
 @SequenceGenerator(name = "PG_ONBOARDING_DETAIL_SEQ", sequenceName = "PG_ONBOARDING_DETAIL_SEQ", allocationSize = 1)
 @Table(name = "PG_ONBOARDING_DETAIL")
 public class OnBoardingEntity {
-
+ 
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PG_ONBOARDING_DETAIL_SEQ")
 	@Column(name = "EMPLOYEEID")
 	private Integer employeeId;
-
-	@Column(name = "DATEOFJOINING")
+	
+	@Column(name = "DATEOFJOINING")	
 	private Date DateOfJoining;
 	
-	@Column(name = "EXPLEVEL")
+	@Column(name = "EXPLEVEL")	
 	private String Level;
-
+ 
 	@Column(name = "BACKGROUNDCHECKSTATUS")
 	private String BackgroundCheckStatus;
-
+ 
 	@Column(name = "PROBATIONPERIODSTATUS")
 	private String ProbationPeriod;
-
+ 
 	@Column(name = "IDPROOF")
 	private String IdProofpath;
-
+ 
 	@Column(name = "PHOTOGRAPHLOCATION")
 	private String photographPath;
-
+ 
 	@Column(name = "RELANDEXPLETTERLOCATION")
 	private String relivingLetterPath;
+	
+	@Column(name = "EMPLOYEE_CODE")
+	private String employeeCode;
 
 	public OnBoardingEntity() {
 		super();
-
+		// TODO Auto-generated constructor stub
 	}
 
 	public OnBoardingEntity(Integer employeeId, Date dateOfJoining, String level, String backgroundCheckStatus,
-			String probationPeriod, String idProofpath, String photographPath, String relivingLetterPath) {
+			String probationPeriod, String idProofpath, String photographPath, String relivingLetterPath,
+			String employeeCode) {
 		super();
 		this.employeeId = employeeId;
-		this.DateOfJoining = dateOfJoining;
-		this.Level = level;
-		this.BackgroundCheckStatus = backgroundCheckStatus;
-		this.ProbationPeriod = probationPeriod;
-		this.IdProofpath = idProofpath;
+		DateOfJoining = dateOfJoining;
+		Level = level;
+		BackgroundCheckStatus = backgroundCheckStatus;
+		ProbationPeriod = probationPeriod;
+		IdProofpath = idProofpath;
 		this.photographPath = photographPath;
 		this.relivingLetterPath = relivingLetterPath;
+		this.employeeCode = employeeCode;
 	}
 
 	public Integer getEmployeeId() {
@@ -65,7 +70,7 @@ public class OnBoardingEntity {
 	}
 
 	public void setEmployeeId(Integer employeeId) {
-		employeeId = employeeId;
+		this.employeeId = employeeId;
 	}
 
 	public Date getDateOfJoining() {
@@ -124,12 +129,22 @@ public class OnBoardingEntity {
 		this.relivingLetterPath = relivingLetterPath;
 	}
 
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
+	}
+
 	@Override
 	public String toString() {
 		return "OnBoardingEntity [employeeId=" + employeeId + ", DateOfJoining=" + DateOfJoining + ", Level=" + Level
 				+ ", BackgroundCheckStatus=" + BackgroundCheckStatus + ", ProbationPeriod=" + ProbationPeriod
 				+ ", IdProofpath=" + IdProofpath + ", photographPath=" + photographPath + ", relivingLetterPath="
-				+ relivingLetterPath + "]";
+				+ relivingLetterPath + ", employeeCode=" + employeeCode + "]";
 	}
 
+	
+ 
 }

@@ -76,7 +76,8 @@ public class RecruitmentService
 //		String candName=details.getCandidatename();
 //		return details;
 //	}
-	public String openInterviewBycandidatename(Integer candidateid) {
+	public String openInterviewBycandidatename(Integer candidateid)
+	{
 		RecruitmentEntity details = repository.findBycandidateid(candidateid) ;
 		String candName=details.getCandidatename();
         return candName;
@@ -89,7 +90,56 @@ public class RecruitmentService
 		return details;
 	}
 
+	public List<OnBoardingEntity> getAllOnboard()
+	{
+		// TODO Auto-generated method stub
+		List<OnBoardingEntity> result = (List<OnBoardingEntity>) onBoardRepository.findAll();
+		
+		return result;
+	}
+	
+	
+//--------------
+	public RecruitmentEntity createAssigneeDetail(RecruitmentEntity entity)
+	{
+		// TODO Auto-generated method stub
+		System.out.println("createAssigneeDetail");
+	
+			// update existing entry 
+			Optional<RecruitmentEntity> Detail = repository.findById(entity.getCandidateid());
+			
+			if(Detail.isPresent()) 
+			{
+				RecruitmentEntity newEntity = Detail.get();
+				newEntity.setCandidatename(entity.getCandidatename());
+				newEntity.setAssignee1(entity.getAssignee1());
+				newEntity.setInterviewdate1(entity.getInterviewdate1());
+				
+				
+				newEntity = repository.save(newEntity);
+				
+				return newEntity;
+			} else {
+				entity = repository.save(entity);
+				
+				return entity;
+			}
+		}
 }
+		
+		
+	
+	
+	/*
+	 * public RecruitmentEntity createAssigneeDetail(RecruitmentEntity Entity) { //
+	 * TODO Auto-generated method stub System.out.println("createCandidateDetail");
+	 * //if (Entity.getCandidateid() == null) { Entity = repository.save(Entity);
+	 * 
+	 * } return Entity;
+	 * 
+	 * }
+	 */
+
 /*
  * public RecruitmentEntity openInterviewBycandidatename(String candidatename) {
  * // TODO Auto-generated method stub

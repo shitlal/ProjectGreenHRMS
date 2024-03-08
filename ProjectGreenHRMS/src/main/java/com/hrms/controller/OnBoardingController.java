@@ -86,16 +86,21 @@ public class OnBoardingController {
 
 		OnBoardingEntity savedEntity = onBoardingRepository.save(onBoardingEntity);
 		Integer empId = savedEntity.getEmployeeId();
-
+		String employeeCode= "C0" + empId;
 		// Pass the generated ID to the view
 
 		onBoardingEntity.setEmployeeId(empId);
-		model.addAttribute("OnBoard", onBoardingEntity); // Assuming OnBoardingEntity is your form model
+		onBoardingEntity.setEmployeeCode(employeeCode);
+		//onBoardingEntity.setEmployeeCode(empId);
+		model.addAttribute("OnBoard", onBoardingEntity);
+		model.addAttribute("OnBoardlatest", onBoardingEntity);// Assuming OnBoardingEntity is your form model
 		return "EmployeeCreation";
 	}
 
 	@PostMapping("/upload")
-	public ResponseEntity<String> handleFileUpload(@RequestParam("empolyeeId") Integer EmpolyeeId,
+	public ResponseEntity<String> handleFileUpload(
+			@RequestParam("employeeId") String employeeCode,
+			@RequestParam("employeeId") Integer employeeId,
 			@RequestParam("dateOfJoining") @DateTimeFormat(pattern= "yyyy-MM-dd") Date DateOfJoining,
 			@RequestParam("level") String Level,
 			@RequestParam("backgroundCheckStatus") String BackgroundCheckStatus,
@@ -106,15 +111,16 @@ public class OnBoardingController {
 		
 		
 		// Save files to the file system
-		String idProofPath = saveFile(idProof, "idProof", EmpolyeeId);
-		String photographPath = saveFile(photograph, "photograph", EmpolyeeId);
-		String relivingLetterPath = saveFile(relivingLetter, "relivingLetter", EmpolyeeId);
+		String idProofPath = saveFile(idProof, "idProof","C0"+employeeCode);
+		String photographPath = saveFile(photograph, "photograph","C0"+employeeCode);
+		String relivingLetterPath = saveFile(relivingLetter, "relivingLetter","C0"+employeeCode);
 		
 
 		// Set file paths in the OnBoardingEntity
 		OnBoardingEntity onBoardingEntity = new OnBoardingEntity();
 
-		onBoardingEntity.setEmployeeId(EmpolyeeId);
+		onBoardingEntity.setEmployeeId(employeeId);
+		onBoardingEntity.setEmployeeCode("C0"+employeeCode);
 		onBoardingEntity.setDateOfJoining(DateOfJoining);
 		onBoardingEntity.setLevel(Level);
 		onBoardingEntity.setBackgroundCheckStatus(BackgroundCheckStatus);
@@ -126,12 +132,12 @@ public class OnBoardingController {
 		// Save OnBoardingEntity to the database
 		onBoardingRepository.save(onBoardingEntity);
 
-		 return ResponseEntity.ofNullable("Files uploaded successfully!");
+		return ResponseEntity.ok("Files uploaded successfully!");
 	}
 
-	
-	private String saveFile(MultipartFile file, String fileType, Integer employeeId) {
-	    String employeeFolderPath = fileUploadPath + File.separator + "Employee_" + employeeId;
+
+	private String saveFile(MultipartFile file, String fileType, String employeeCode) {
+	    String employeeFolderPath = fileUploadPath + File.separator + "Employee_" + employeeCode;
 	    File employeeFolder = new File(employeeFolderPath);
 	    if (!employeeFolder.exists()) {
 	        employeeFolder.mkdirs(); // Create employee directory if it doesn't exist

@@ -70,6 +70,12 @@ public class RecruitmentEntity {
 	
 	@Column(name = "ROUND_1")
 	private String round_1;
+	
+	@Column(name = "ASSIGNEE1")
+	private String assignee1;
+	
+	@Column(name = "INTERVIEWDATE1")
+	private String interviewdate1;
 
 	public RecruitmentEntity() {
 		super();
@@ -78,7 +84,9 @@ public class RecruitmentEntity {
 
 	public RecruitmentEntity(Integer candidateid, String jobCode, String candidatename, String current_location,
 			String cand_experience, String lastinterview_round, String selection_status, String interviw_status1,
-			String photo, String resume, String candidate_emailid, String candidate_contactno, String id_proof,String round_1 ) {
+			String photo, String resume, String candidate_emailid, String candidate_contactno, String id_proof,
+			String round_1, String assignee1, String interviewdate1) 
+	{
 		super();
 		this.candidateid = candidateid;
 		this.jobCode = jobCode;
@@ -94,6 +102,8 @@ public class RecruitmentEntity {
 		this.candidate_contactno = candidate_contactno;
 		this.id_proof = id_proof;
 		this.round_1 = round_1;
+		this.assignee1 = assignee1;
+		this.interviewdate1 = interviewdate1;
 	}
 
 	public Integer getCandidateid() {
@@ -200,14 +210,30 @@ public class RecruitmentEntity {
 		this.id_proof = id_proof;
 	}
 	
-	
-
 	public String getRound_1() {
 		return round_1;
 	}
 
 	public void setRound_1(String round_1) {
 		this.round_1 = round_1;
+	}
+	
+	public String getAssignee1() {
+		return assignee1;
+	}
+
+	public void setAssignee1(String assignee1) {
+		this.assignee1 = assignee1;
+	}
+	
+	
+
+	public String getInterviewdate1() {
+		return interviewdate1;
+	}
+
+	public void setInterviewdate1(String interviewdate1) {
+		this.interviewdate1 = interviewdate1;
 	}
 
 	@Override
@@ -217,9 +243,7 @@ public class RecruitmentEntity {
 				+ ", lastinterview_round=" + lastinterview_round + ", selection_status=" + selection_status
 				+ ", Interviw_status1=" + Interviw_status1 + ", photo=" + photo + ", resume=" + resume
 				+ ", candidate_emailid=" + candidate_emailid + ", candidate_contactno=" + candidate_contactno
-				+ ", id_proof=" + id_proof + ",round_1=" +round_1+" ]";
+				+ ", id_proof=" + id_proof + ", round_1=" + round_1 + ", assignee1=" + assignee1 + ", interviewdate1="
+				+ interviewdate1 + "]";
 	}
-	
- 
- 
 }

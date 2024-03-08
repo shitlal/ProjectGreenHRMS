@@ -14,10 +14,4 @@ public interface OnBoardingRepository extends JpaRepository<OnBoardingEntity, In
 
 	OnBoardingEntity findByEmployeeId(Integer employeeId);
 
-	
-
-	
-
-	
-
 }

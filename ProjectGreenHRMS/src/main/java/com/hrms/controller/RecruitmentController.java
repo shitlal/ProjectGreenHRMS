@@ -46,15 +46,20 @@ public class RecruitmentController
 //			System.out.println("getAllCareerOpp");
 
 		List<CareerOppEntity> list = service.getAllCareerOpp();
-		System.out.println(list);
-		List<RecruitmentEntity> list1 = recservice.getAllRecruitment();
+	
 		int count = list.size();
-		System.out.println(count);
-		int count1 = list1.size();
-		model.addAttribute("Recruit", list1);
 		model.addAttribute("career", list);
 		model.addAttribute("careercount",count);
 		
+		//Recruitment Data 
+		List<RecruitmentEntity> list1 = recservice.getAllRecruitment();
+		int count1 = list1.size();
+		model.addAttribute("Recruit", list1);
+		
+		//OnBoarding data
+		List<OnBoardingEntity> list2 = recservice.getAllOnboard();
+		
+		model.addAttribute("careers", list2);
 		
 		/* model.addAttribute("experience", count1); */
 		/* model.addAttribute("Position",count); */
@@ -122,7 +127,7 @@ public class RecruitmentController
 	  model.addAttribute("Recruit", recopp);
 	  
 		}
-		return "AddCareerOpp";
+		return "Recruitment";
 	
 	}
 	 
@@ -138,6 +143,7 @@ public class RecruitmentController
 		 * recservice.openInterviewBycandidatename(candidatename); return
 		 * ResponseEntity.ok(entity); }
 		 */
+	 
 		@GetMapping("interview/{candidateid}")
 	    @ResponseBody
 	    public ResponseEntity<String> openInterviewBycandidatename(Model model, @PathVariable("candidateid") Integer candidateid) {
@@ -145,32 +151,56 @@ public class RecruitmentController
 	        String candName = recservice.openInterviewBycandidatename(candidateid);
 	        return ResponseEntity.ok(candName);
 	    }
-	// Show employeeID data
-		
-@GetMapping(path = {"Fetch/{EmployeeId}" })
 
-public String getByEmployeeId(Model model, @PathVariable("employeeId") Optional<Integer> employeeId) 
-
-{
-	if (employeeId.isPresent()) 
-	{
-		System.out.println(employeeId);
+		//add interview Rounds	
 		
-		OnBoardingEntity entity = recservice.getByEmployeeId(employeeId.get());
-		 model.addAttribute("onboard", entity); 
-		 
-	    model.addAttribute("employeeId", entity.getEmployeeId()); 
-	
+		/*
+		 * @RequestMapping(path = "/AddAssignee") public String
+		 * createAssigneeDetail(RecruitmentEntity AssigneeDetail)
+		 * 
+		 * { recservice.createCandidateDetail(AssigneeDetail); return
+		 * "CloseAndRedirect"; }
+		 * 
+		 * @RequestMapping(path = { "/CreateAssignee" })
+		 * 
+		 * public String AssigneeDetail(Model model, @PathVariable("candidateid")
+		 * Optional<Integer> candidateid) { RecruitmentEntity recopps = new
+		 * RecruitmentEntity(); RecruitmentEntity savedEntity = recrepo.save(recopps);
+		 * model.addAttribute("Recruits", recopps);
+		 * 
+		 * return "Recruitment";
+		 * 
+		 * }
+		 */
+		
+		@RequestMapping(path = "/AddAssignee")
+		public String createAssigneeDetail(RecruitmentEntity Assignee) 
+		{
+			System.out.println("createAssigneeDetail ");
 			
-	}
-	
-	return "Recruitment";
+			recservice.createAssigneeDetail(Assignee);
+			
+			return "CloseAndRedirect";
+		}
+		
+		@RequestMapping(path = {"UpdateAddAssignee/{candidateid}"})
+		public String editAssigneeBycandidateid(Model model, @PathVariable("candidateid") Optional<Integer> candidateid) 
+		 
+		{
+			
+			System.out.println("editAssigneeBycandidateid" + candidateid);
+			
+				 //edit="create";
+				 RecruitmentEntity recruitOpp=new RecruitmentEntity();
+				 RecruitmentEntity savedEntity = recrepo.save(recruitOpp);
+				 model.addAttribute("Recruit", recruitOpp);
+				 model.addAttribute("Recruit", savedEntity);
+						
+			return "Recruitment";
+		}
+		 
 }
-
-}
-
-	 
-	 
+ 
 	 
 	/*
 	 * @RequestMapping("/interview/{candidatename}") public String
