@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Onboarding Form</title>
+	<link rel="stylesheet" href="styles.css" />
+	<style>
+	
+	  body {
+    
+            margin: 0;
+            padding: 0;
+        }
+ 
+        nav {
+            background-color: rgb(0, 128, 128);
+            overflow: hidden;
+        }
+ 
+        nav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 10px 12px;
+            text-decoration: none;
+        }
+ 
+        nav a:hover {
+            background-color: #ddd;
+            color: rgb(0, 0, 0);
+        }	
+	</style>
+ 
+</head>
+ 
+<body>
+	<div class="container">
+		<br>
+			<nav>
+				<a th:href="@{/Career}"> <i>Career</i></a>
+				<a th:href="@{/Recruitment}"> <i>Recruitment</i></a>
+				<a th:href="@{/OnBoarding}"><i>OnBoarding</i></a>
+				<!-- Add more menu items as needed -->
+			</nav>
+		 <!---------->
+		
+		<br>
+		<h1><i>On Boarding</i>
+ 
+		</h1>
+		<form action="">
+ 
+ 
+ 
+			 <div class="button_container">
+				<label class="col-form-label" for="jobs">Job Code : </label>
+ 
+ 
+				<select id="firstDropdown" onchange="fetchSecondDropdownValues()">
+					<option th:each="career : ${career}" th:text="${career.jobCode}"></option>
+				</select>
+			</div>
+ 
+			<div class="button_container">
+				<label class="col-form-label">Candidate ID : </label>
+ 
+ 
+ 
+				<select id="secondDropdown" onchange="fetchThirdDropdownValues()">
+					<option th:each="Recruit : ${Recruit}" th:text="${Recruit.candidateid}"></option>
+				</select>
+ 
+			</div>
+ 
+ 
+			<div class="button_container">
+				<label class="col-form-label">FinalInterviewStatus : </label>
+ 
+ 
+ 
+				<select id="thirdDropdown">
+					<option th:each="Recruit : ${Recruit}" th:text="${Recruit.finalInterview_Status}"></option>
+				</select>
+			</div>
+ 
+			<div>
+ 
+				<label for="employeeId"> </label>
+				<button id="myButton" type="submit" onClick="openWindow1()" style="background-color: darkgray"; disabled >
+					Create Employee
+				</button>
+ 
+ 
+ 
+			</div>
+ 
+		</form>
+ 
+ 
+ 
+	</div>
+	<script>
+		function openWindow1() {
+			var w = 500, h = 400;
+			if (document.getElementById) {
+				w = screen.availWidth;
+				h = screen.availHeight;
+			}
+			var popW = 700, popH = 500;
+			var leftPos = (w - popW) / 2;
+			var topPos = (h - popH) / 2;
+			msgWindow = window.open('/OnBoarding/EmpCreation', 'popup', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+			window.close();
+		}
+ 
+		function fetchSecondDropdownValues() {
+			var selectedValue = document.getElementById('firstDropdown').value;
+			// Make an AJAX call to the Spring Boot controller to get values for the second dropdown
+			fetch('/OnBoarding/search/' + selectedValue)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return response.json();
+				})
+				.then(data => {
+					// Populate the second dropdown with the fetched values
+					var secondDropdown = document.getElementById('secondDropdown');
+					secondDropdown.innerHTML = '';
+					data.forEach(Recruit => {
+						var option = document.createElement('option');
+						option.text = Recruit.candidateid;
+						secondDropdown.appendChild(option);
+ 
+					});
+ 
+ 
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+function fetchThirdDropdownValues() {
+    var selectedValue1 = document.getElementById('secondDropdown').value;
+ 
+    fetch('/OnBoarding/searches/' + selectedValue1)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            var thirdDropdown = document.getElementById('thirdDropdown');
+            thirdDropdown.innerHTML = '';
+ 
+            var nullEmployeeCodeFound = false; // Variable to track if any recruit has a null employeeCode
+            var recruit; // Declare the recruit variable outside the loop
+ 
+            data.forEach(entry => {
+                recruit = entry; // Assign entry to recruit within the loop
+ 
+                var option = document.createElement('option');
+                option.text = recruit.finalInterview_status;
+                thirdDropdown.appendChild(option);
+ 
+                if (recruit.employeeCode === null) {
+                    nullEmployeeCodeFound = true; // Set to true if any recruit has a null employeeCode
+                }
+            });
+ 
+            // Enable or disable the button based on the selected value in the third dropdown
+            var myButton = document.getElementById('myButton');
+            myButton.disabled = true; // Disable the button initially
+ 
+            var answer = document.getElementById('thirdDropdown').value;
+ 
+            if (answer === "SELECT" && nullEmployeeCodeFound) {
+                myButton.disabled = false; // Enable the button when conditions are met
+                myButton.style.backgroundColor = "blue";
+            } else {
+                myButton.disabled = true; // Disable the button otherwise
+                myButton.style.backgroundColor = "darkgrey";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+ 
+ 
+	</script>
+ 
+ 
+</body>
+ 
+</html>

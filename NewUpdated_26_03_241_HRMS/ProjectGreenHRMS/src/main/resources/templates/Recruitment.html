@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Form</title>
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+
+body {
+  background-color: #ccc;
+}
+
+.container {
+  max-width: 900px;
+  margin:  auto;
+}
+
+  h1 {
+            color: seagreen;
+            }
+
+.dropbtn {
+ background-color: rgb(255, 0, 128);
+  border: transparent solid 2px;
+  padding: 5px 5px;
+  color: white;
+  border-radius: 8px;
+  transition: 0.3s ease-in;
+}
+
+
+
+#myInput {
+  box-sizing: border-box;
+
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 200px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+  
+  .form_container {
+  margin-top: -10%;
+  display: table-row;
+  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  width: 100px;
+}
+.form_control {
+  display: flex;
+  flex-direction: row;
+}
+
+input,
+select,
+textarea {
+  padding: 6px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  width: 150px;
+}
+label1{
+	 background-color: rgb(0, 128, 192);
+  border: transparent solid 2px;
+  padding: 5px 5px;
+  color: white;
+  border-radius: 8px;
+  transition: 0.3s ease-in;
+  
+}
+  
+  .form_container_Round1 {
+	   
+            display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+        }
+        
+         th {
+            cursor: pointer;
+        }
+        
+      .form_container_Round2 {
+	   
+            display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+        }
+        
+         th {
+            cursor: pointer;
+        }
+        
+        .form_container_Round3 {
+	   
+            display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+        }
+        
+         th {
+            cursor: pointer;
+        }
+        
+    .form_container_Round4{
+			  display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+			
+		}
+		
+		
+		.Interview_Final_Status{
+			 display: none; /* Initially hidden */
+            padding: 20px;
+            border: 2px solid #333;
+            width: 900px;
+            margin: 0 auto;
+		}
+		
+		 .hideAdd {
+			  display: none; /* Initially hidden */
+           	
+		}
+		
+        
+        table{
+   overflow-y:scroll;
+   
+   overflow-x:scroll;
+   height:200px;
+   display:block;
+   }
+   
+     body {
+    
+            margin: 0;
+            padding: 0;
+        }
+ 
+        nav {
+            background-color: rgb(0, 128, 128);
+            overflow: hidden;
+        }
+ 
+        nav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 10px 12px;
+            text-decoration: none;
+        }
+ 
+        nav a:hover {
+            background-color: #ddd;
+            color: rgb(0, 0, 0);
+        }	
+		 
+</style>
+
+  </head>
+  
+  <body>
+	   <div class="container">
+		   <br>
+				<nav>
+					<a th:href="@{/Career}"> <i>Career</i></a>
+					<a th:href="@{/Recruitment}"> <i>Recruitment</i></a>
+					<a th:href="@{/OnBoarding}"><i>OnBoarding</i></a>
+					<!-- Add more menu items as needed -->
+				</nav>
+		 <!---------->
+		  <br>
+        <h1><i>Recruitment Page</i> </h1>
+        
+        <br> 
+<br>
+ <div>
+
+  <label1  for=" ">Job_Code:</label1>
+   
+  <select name="career" id="career"  onchange="fetchDataForDropdown()"  >
+	  <option>select</option>
+      <option
+       th:each="career : ${career}" 
+       th:text="${career.jobCode}"
+       th:value="${career.jobCode}" 
+     
+          </option>
+       
+  </select>
+ 
+  <!--<button4 name="submit" type="submit" value="save"/button4>-->
+  <!--<button type="submit" class="button1" id="formaction" th:onclick="Dropdowns(show{C01213)})"  >click </button>-->
+  
+  <br><br>
+  
+          <form action="" class="form_container" id="formaction" >
+			 		 			  
+			   <br>
+	 <label for="Position"><b> Position</b></label>
+    <input type="text" placeholder="Position" name="position" id="position" readonly >
+    
+    
+     <label for="Location"><b>Location</b></label>
+    <input type="text" placeholder="Location" name="location" id="location" readonly>
+    
+    <label for="Description"><b>Description</b></label>
+    <input type="Description" placeholder="Description" name="description" id="description" readonly>
+    
+    
+     <label for="Experience"><b>Experience</b></label>
+    <input type="Experience" placeholder="Experience" name="experience" id="experience" readonly>
+    
+	<label for="jobCode"><b></b></label>
+	<input type="hidden" placeholder="jobCode" name="jobCode" id="jobCode" readonly >
+	
+			
+  </form>
+  </form>
+ 
+ </div>
+  
+  <br>
+  <br>
+  
+    <div th:switch="${Recruit}" class="container my-5"> 
+		  <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+
+  
+   <table id="candTable" style="width:100%; display: none;">
+	    <thead>
+  <tr class="header">
+   <th style="width:10%;" >candidateid</th>
+    <th style="width:10%;">candidatename</th>
+     <th style="width:20%;">current_location</th>
+     <th style="width:20%;">cand_experience</th>
+      <th style="width:20%;">lastinterview_round</th>
+       <th style="width:20%;">selection_status</th>
+                  </tr>
+  
+</thead>
+    <!--<td>01</td>
+    <td>C013677</td>
+     <td>Java Developer</td>
+    <td>Java Developer</td>
+    <td>Mumbai</td>
+    <td>01</td>
+    <td>-->
+		 <tbody>
+        <!-- Table content will be dynamically updated here -->
+    </tbody>
+		  <!--<tr th:each="Recruit : ${Recruit1}">
+         
+        <td th:text="${Recruit.candidateid}" onclick="toggleForm()" ></td>
+        <td th:text="${Recruit.candidatename}" onclick="toggleForm()" ></td>
+        <td th:text="${Recruit.current_location}"></td>
+        <td th:text="${Recruit.cand_experience}"></td>
+        <td th:text="${Recruit.lastinterview_round}"></td>
+        <td th:text="${Recruit.selection_status}"></td>
+        
+        <td th:text="${Recruit.round_1}"></td>
+        
+        </tr>-->
+		 
+    </table>
+    
+<!--    <input type="text" id="id" th:value="${Recruitcount}">-->
+    
+    
+	<div class="button_container">
+	
+		<form action="" class="hideAdd"  method="get">
+	
+			<label for="jobCodes"><b> jobCodes</b></label>
+			<input type="text" placeholder="jobCodes" name="jobCodes" id="jobCodes" readonly>
+	
+	
+			<button type="submit" id="myButton" onclick="openaddcandWindow()">Add Candidate</button>
+		</form>
+	
+	</div>
+        
+    	   </div></div></div>
+    	   <br>
+    	   
+		<div id="round1">
+			<!--	<form action="" class="form_container_form" id="formaction">-->
+		
+			<form class="form_container_Round1" id="myforms"  method="post">
+		
+				<label1 for=" "><b>Interview Round_1:</b></label1>
+				<input type="text" class="form-control" id="candidatenames" placeholder="candidatename">
+		
+				<br>
+				<br>
+		
+			<!--	<labelfor="candidatename"><b>candidatename</b></label>
+					<input type="text" class="form-control" id="candidatename" placeholder="candidatename">-->
+		
+		
+					<labels for=" "><b> Assigned_To:</b></labels>
+				<!--	<select name="careers" id="careers">
+						<option>select</option>
+						<option th:each="careers : ${careers}" th:value="${careers.employee_name}"
+							th:text="${careers.employee_name}" </option>
+					</select>-->
+		
+		
+					<!--<label for="Calendar"><b>Calendar</b></label>
+							<input type="date" th:field="*{interviewdate1}" placeholder="Calendar" name="Calendar">-->
+		
+					<label for="interviewdate1" class="col-form-label"><b>Calendar</b></label>
+					<input type="date" class="form-control" id="interviewdate1" placeholder="interviewdate1" />
+		
+					<button type="submit" id="Confirmid"> Confirm</button>
+					<br>
+		
+					<button type="button" onclick="openform()">select</button>
+					<button type="button" onclick="toggleForm()">Reject</button>
+					<button type="button" onclick="FinalStatus()">Final Select</button>
+		
+			</form>
+		</div>
+		   
+		   <br>
+		   <br>
+		
+		<div>
+			<form action="" class="form_container_Round2" id="formaction1">
+				<label1 for=" "><b>Interview Round_2:</b></label1>
+				<br>
+				<br>
+		
+				<labelfor="candidatename"><b>candidatename</b></label>
+					<input type="text" class="form-control" id="candidatename" placeholder="candidatename">
+		
+					<labels for=" "><b> Assigned_To:</b></labels>
+		
+					<!--<select name="careers" id="careers">
+						<option th:each="careers : ${careers}" th:value="${careers.employee_name}"
+							th:text="${careers.employee_name}" </option>
+		
+					</select>-->
+		
+					<label for="Calendar"><b>Calendar</b></label>
+					<input type="date" placeholder="Calendar" name="Calendar">
+		
+		
+					<button type="button" onclick="openformaction()">select</button>
+					<button type="button" onclick="openform()">Reject</button>
+					<button type="button" onclick="FinalStatus()">Final Select</button>
+			</form>
+		</div>
+			
+			<br>
+			
+			<div>
+				<form action="" class="form_container_Round3" id="formaction1">
+					<label1 for=" "><b>Interview Round_3:</b></label1>
+					<br>
+					<br>
+			
+			
+					<labelfor="candidatename"><b>candidatename</b></label>
+						<input type="text" class="form-control" id="candidatename" placeholder="candidatename">
+			
+						<labels for=" "><b> Assigned_To:</b></labels>
+			
+						<!--<select name="careers" id="careers">
+							<option>Select</option>
+							<option th:each="careers : ${careers}" th:value="${careers.employee_name}"
+								th:text="${careers.employee_name}" </option>
+			
+						</select>-->
+			
+						<label for="Calendar"><b>Calendar</b></label>
+						<input type="date" placeholder="Calendar" name="Calendar">
+			
+			
+						<button type="button" onclick="openformaction()">select</button>
+						<button type="button" onclick="openformaction()">Reject</button>
+						<button type="button" onclick="FinalStatus()">Final Select</button>
+				</form>
+			</div>
+			
+					<div>
+						<form action="" class="form_container_Round4" id="formaction1">
+							<label1 for=" "><b>Interview Round_4:</b></label1>
+							<br>
+							<br>
+					
+					
+							<labelfor="candidatename"><b>candidatename</b></label>
+								<input type="text" class="form-control" id="candidatename" placeholder="candidatename">
+					
+								<labels for=" "><b> Assigned_To:</b></labels>
+					
+							<!--	<select name="careers" id="careers">
+									<option>Select</option>
+									<option th:each="careers : ${careers}" th:value="${careers.employee_name}"
+										th:text="${careers.employee_name}" </option>
+					
+								</select>-->
+					
+								<label for="Calendar"><b>Calendar</b></label>
+								<input type="date" placeholder="Calendar" name="Calendar">
+					
+					
+								<button type="button" onclick="openformaction()">select</button>
+								<button type="button" onclick="openformaction()">Reject</button>
+								<button type="button" onclick="FinalStatus()">Final Select</button>
+						</form>
+					</div>
+			
+					<div>
+  <form action="" class="Interview_Final_Status" id="formaction1">
+			<label1 for=" "><b>Interview_Final_Status:</b></label1>
+			<br>
+			<br>
+	
+			<button type="button"   id="btns"  >selected</button>
+			<button type="button" id="texts" >Rejected</button>
+			
+			
+			</form>
+			</div>
+			    	 	   
+    	<script>
+			
+			
+			function openaddcandWindow() {
+				var w = 480, h = 340;
+
+				if (document.getElementById) {
+					w = screen.availWidth;
+					h = screen.availHeight;
+				}
+
+				var popW = 700, popH = 500;
+
+				var leftPos = (w - popW) / 2;
+				var topPos = (h - popH) / 2;
+
+				msgWindow = window.open('Recruitment/createCand', 'popup', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+				
+				 {
+		//gettting the values
+		
+				//var email = document.getElementById("email").value;
+				
+				var jobCodes = document.getElementById("jobCodes").value;
+		//saving the values in local storage
+		
+				//localStorage.setItem("txtValue", email);
+				
+				
+				localStorage.setItem("txtValue4", jobCodes);
+			}
+			}
+        	
+				function fetchDataForDropdown() {
+						var selectedValue = document.getElementById('career').value;
+						document.getElementById('candTable').style.display = 'block';
+
+
+						{
+							const hideAdd = document.querySelector('.hideAdd');
+							hideAdd.style.display = (hideAdd.style.display == 'none') ? 'none' : 'block';
+						}
+
+						// Make an AJAX call to the Spring Boot controller to get data based on the selected value
+						fetch('/Recruitment/show/' + selectedValue)
+							.then(response => {
+								if (!response.ok) {
+									throw new Error('Network response was not ok');
+								}
+								return response.json();
+							})
+							.then(data => {
+								// Update the text fields with the fetched data
+								document.getElementById('position').value = data.position;
+								document.getElementById('location').value = data.location;
+								document.getElementById('description').value = data.description;
+								document.getElementById('experience').value = data.experience;
+
+								document.getElementById('jobCodes').value = data.jobCode;
+
+
+								updateTableContent(selectedValue);
+							
+								
+							})
+							.catch(error => {
+								console.error('Error:', error);
+							});
+					}
+    
+				function updateTableContent(selectedValue) {
+
+					fetch('/Recruitment/getCandData/' + selectedValue)
+						.then(response => {
+							if (!response.ok) {
+								throw new Error('Network response was not ok');
+							}
+							return response.json();
+						})
+						.then(listCand => {
+							// Update the table content
+							var tableBody = document.getElementById('candTable').getElementsByTagName('tbody')[0];
+							tableBody.innerHTML = '';
+
+							listCand.forEach(entity => {
+								var row = tableBody.insertRow(tableBody.rows.length);
+								var cell1 = row.insertCell(0);
+								var cell2 = row.insertCell(1);
+								var cell3 = row.insertCell(2);
+								var cell4 = row.insertCell(3);
+								var cell5 = row.insertCell(4);
+								var cell6 = row.insertCell(5);
+							
+
+								cell1.innerHTML = entity.candidateid;
+								cell2.innerHTML = entity.candidatename;
+								cell3.innerHTML = entity.current_location;
+								cell4.innerHTML = entity.cand_experience;
+								cell5.innerHTML = entity.lastinterview_round;
+								cell6.innerHTML = entity.selection_status;
+								
+								row.addEventListener('click', function () {
+									// Handle row click, you can update the container content here
+									
+									if(entity.lastinterview_round==="Round_One")
+									{
+								
+										toggleForm1(entity.candidateid);
+										myforms.Confirmid.style.backgroundColor="red";
+										closeForm2(entity.candidateid);
+										closeForm3(entity.candidateid);
+										closeForm4(entity.candidateid);
+										
+									
+									}
+									
+									if(entity.lastinterview_round==="Round_Two")
+									{
+										toggleForm1(entity.candidateid);																		
+										toggleForm2(entity.candidateid);
+									    closeForm3(entity.candidateid);
+										closeForm4(entity.candidateid);																			
+									}
+																		
+									if(entity.lastinterview_round==="Round_Three")
+									{
+										toggleForm1(entity.candidateid);
+										toggleForm2(entity.candidateid);
+										toggleForm3(entity.candidateid);
+										closeForm4(entity.candidateid);	
+									}
+									
+									if(entity.lastinterview_round==="Round_Four")
+									{
+										toggleForm1(entity.candidateid);
+										toggleForm2(entity.candidateid);
+										toggleForm3(entity.candidateid);
+										toggleForm4(entity.candidateid);
+									}
+																																		
+									
+								});
+								// Add additional cells as needed
+							});
+						})
+						.catch(error => {
+							console.error('Error:', error);
+						});
+				}
+    
+        	  function toggleForm1(selectedCandId1) {
+				  
+					const form_container_Round1 = document.querySelector('.form_container_Round1');
+					form_container_Round1.style.display = (form_container_Round1.style.display = 'block');
+					
+						
+					fetch('/Recruitment/interview/' + selectedCandId1)
+						.then(response => {
+							if (!response.ok) {
+								throw new Error('Network response was not ok');
+							}
+							return response.text(); // Assuming the response is a plain text value
+						})
+						.then(candName => {
+							// Update the input tag in the container with the fetched additional information
+							//var candidatename = document.getElementById('candidatename');
+							var candidatenames = document.getElementById('candidatenames');
+							//candidatename.value = candName;
+							candidatenames.value = candName;
+							
+							// You can customize this based on your requirements.
+						})
+						.catch(error => {
+							console.error('Error:', error);
+						});
+
+				}
+		function toggleForm2(selectedCandId2) {
+			const form_container_Round2 = document.querySelector('.form_container_Round2');
+				form_container_Round2.style.display = (form_container_Round2.style.display = 'block');
+
+				//var selectedValue = document.getElementById('Recruit').value;
+
+				// Make an AJAX call to the Spring Boot controller to get data based on the selected value
+
+
+		}
+				
+				  function toggleForm3(selectedCandId3) {
+					const form_container_Round3 = document.querySelector('.form_container_Round3');
+						form_container_Round3.style.display = (form_container_Round3.style.display = 'block');
+						
+				
+					}
+
+					function toggleForm4(selectedCandId4) {
+					    const form_container_Round4 = document.querySelector('.form_container_Round4');
+						form_container_Round4.style.display = (form_container_Round4.style.display =  'block');
+					}
+					
+					function FinalStatus()
+					 {
+						const Interview_Final_Status = document.querySelector('.Interview_Final_Status');
+						Interview_Final_Status.style.display = (Interview_Final_Status.style.display == 'block') ;
+					}
+
+
+                    //close forms
+                    
+	           function closeForm1(selectedCandId1) {
+				  
+					const form_container_Round1 = document.querySelector('.form_container_Round1');
+					form_container_Round1.style.display = (form_container_Round1.style.display = 'none');
+					}
+
+
+	         function closeForm2(selectedCandId2) {
+			  const form_container_Round2 = document.querySelector('.form_container_Round2');
+				form_container_Round2.style.display = (form_container_Round2.style.display = 'none');
+				}
+
+	           function closeForm3(selectedCandId3) {
+		         const form_container_Round3 = document.querySelector('.form_container_Round3');
+		        form_container_Round3.style.display = (form_container_Round3.style.display = 'none');
+	            }
+	            
+	            	function closeForm4(selectedCandId4) {
+					    const form_container_Round4 = document.querySelector('.form_container_Round4');
+						form_container_Round4.style.display = (form_container_Round4.style.display =  'none');
+					}
+		function closeFinalStatus()
+					 {
+						const Interview_Final_Status = document.querySelector('.Interview_Final_Status');
+						Interview_Final_Status.style.display = (Interview_Final_Status.style.display == 'none') ;
+					}
+	           
+	
+
+					const btns = document.getElementById('btns');
+
+					btns.addEventListener('click', function onClick() {
+						alert("Are you sure you want to Select this Candidate? ");
+
+						btns.style.backgroundColor = 'MediumSeaGreen';
+						btns.style.color = 'white';
+
+					})
+                
+					const texts = document.getElementById('texts');
+
+					texts.addEventListener('click', function onClick() {
+						alert("Are you sure you want to Reject this Candidate? ");
+						texts.style.backgroundColor = 'Red';
+						texts.style.color = 'white';
+				
+                });
+                
+             				
+		</script>
+
+ </body>
+</html>
