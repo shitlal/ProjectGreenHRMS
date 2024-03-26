@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<style>
+        /* Add your CSS styling for the menu bar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+ 
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+ 
+        nav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+ 
+        nav a:hover {
+            background-color: #ddd;
+            color: rgb(255, 0, 0);
+        }
+    </style>
+<body>
+    <nav>
+    <a th:href="@{/Career}" >Career</a>
+    <a th:href="@{/Recruitment}" >Recruitment</a>
+    <a th:href="@{/OnBoarding}" >OnBoarding</a>
+    <!-- Add more menu items as needed -->
+</nav>
+ 
+<!-- Your Page Content Goes Here -->
+<h2>Welcome to the Home Page</h2>
+<p>This is the content of your home page.</p>
+</body>
+</html>
