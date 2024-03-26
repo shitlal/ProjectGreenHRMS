@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add Opportunity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body onload="change();">
+	
+    <div class="container my-5" style="padding-top: 30px;">
+    
+        <h3 id="myHeader"> </h3>
+          <h3 aria-valuetext="${createupdateid}"> </h3>
+               
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form th:action="@{/Career/createJobDetail}" th:object="${career}" method="post">
+                    
+                    	<div class="row">
+                        	
+                            <div class="form-group col-md-8">
+                                 <label for="jobCode" class="col-form-label">Job Code</label> 
+   								 <input type="text" th:field="*{jobCode}" class="form-control" 
+                                            id="jobCode" placeholder="Job Code" readonly required/>	
+                            </div>
+                            <div class="form-group col-md-8">
+								  <label for="position" class="col-form-label">Position</label> 
+    							<input type="text" th:field="*{position}" class="form-control" 
+                                            id="position" placeholder="Position" required />
+                                
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="location" class="col-form-label">Location</label> 
+                                <input type="text" th:field="*{location}" class="form-control" 
+                                            id="location" placeholder="Location" required />
+                            </div>
+							<div class="form-group col-md-8">
+                                <label for="description" class="col-form-label">Description</label> 
+                                <input type="text" th:field="*{description}" class="form-control" 
+                                            id="description" placeholder="Description" required/>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="experience" class="col-form-label">Experience</label> 
+                                <input type="text" th:field="*{experience}" class="form-control" 
+                                            id="experience" placeholder="Experience" required/>
+                            </div>
+                            <div class="form-group col-md-8">
+                                 
+                                <input type="radio"
+                                            id="active" name="status" th:field="*{status}" value="Active"  required/>
+                                  <label for="active" class="col-form-label">Active</label>
+                                  <input type="radio"
+                                            id="inactive" name="status" th:field="*{status}"  value="InActive" required  />
+                                  <label for="inactive" class="col-form-label">InActive</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" id="submitId" class="btn btn-primary" value="" >
+                            </div>
+
+                            <input type="hidden" id="id" th:field="*{id}">
+                            <input type="hidden" id="createupdate" th:value="${createupdateid}">
+    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+		function change()
+{
+	createupdate=document.getElementById("createupdate").value
+	//alert();
+	if(createupdate=="edit"){
+    document.getElementById("submitId").value="Update";
+    myHeader.innerText = "Update Opportunity";
+    }
+    else{
+		document.getElementById("submitId").value="Submit";
+		myHeader.innerText = "Add Opportunity";
+	}
+}
+
+
+	</script>
+   
+</body>
+
+</html>

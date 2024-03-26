@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Add Opportunity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+		
+    <div class="container my-5" style="padding-top: 30px;">
+    
+        <h3> Add Candidate</h3>
+        
+        <h1>Result</h1>
+          <p id="res"> </p>	
+          
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+					
+                    <form th:action="@{/Career/addCandidates}" th:object="${Recruit}" method="post">
+                    
+                    	<div class="row">
+							
+				                     
+                         
+						<!--	<div class="form-group col-md-8">
+								<label for="jobCode" class="col-form-label">jobCode</label>
+								<input type="number" th:field="*{jobCode}" class="form-control" id="jobCodes" placeholder="jobCode"  readonly/>
+								
+								<span id="data4" th:text="${jobCode}"  style="display:none;"></span>
+							</div>-->
+                            		
+									
+                         						                        	
+							<div class="form-group col-md-8">
+								<label for="candidateid" class="col-form-label">candidateid</label>
+								<input type="number" th:field="*{candidateid}" class="form-control" id="candidateid" placeholder="candidateid"
+									readonly>
+							</div>
+							
+							<div class="form-group col-md-8">
+										<label for="jobCode" class="col-form-label">jobCode</label>
+										<input type="text" th:field="*{jobCode}" class="form-control" id="jobCodes" placeholder="jobCode" readonly />
+									
+									</div>
+                            
+                            <div class="form-group col-md-8">
+								  <label for="candidatename" class="col-form-label">candidatename</label> 
+    							<input type="text" th:field="*{candidatename}" class="form-control" 
+                                            id="candidatename" placeholder="candidatename" required/>
+                                
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="current_location" class="col-form-label">current_location</label> 
+                                <input type="text" th:field="*{current_location}" class="form-control" 
+                                            id="current_location" placeholder="current_location" required/>
+                            </div>
+							<div class="form-group col-md-8">
+                                <label for="cand_experience" class="col-form-label">cand_experience</label> 
+                                <input type="number" th:field="*{cand_experience}" class="form-control" 
+                                            id="cand_experience" placeholder="cand_experience" required />
+                            </div>
+                            
+                            <div class="form-group col-md-8">
+                                <label for="resume" class="col-form-label">resume</label> 
+                                <input type="file" th:field="*{resume}" class="form-control" 
+                                            id="resume" placeholder="resume"  required />
+                            </div>
+                            
+                            
+                            <div class="form-group col-md-8">
+                                <label for="photo" class="col-form-label">photo</label> 
+                                <input type="file" th:field="*{photo}" class="form-control" 
+                                            id="photo" placeholder="photo" />
+                            </div>
+                                                                     
+                            <div class="form-group col-md-8">
+                                <label for="candidate_emailid" class="col-form-label">candidate_emailid</label> 
+                                <input type="email" th:field="*{candidate_emailid}" class="form-control" 
+                                            id="candidate_emailid" placeholder="candidate_emailid" required/>
+                            </div>
+                            
+                            <div class="form-group col-md-8">
+                                <label for="candidate_contactno" class="col-form-label">candidate_contactno</label> 
+                                <input type="text" th:field="*{candidate_contactno}" class="form-control" 
+                                            id="candidate_contactno" placeholder="candidate_contactno" pattern="[0-9]{10}" maxlength="10" required/>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="selection_status" class="col-form-label">selection_status</label> 
+                                <input type="text" th:field="*{selection_status}" class="form-control" 
+                                            id="selection_status" placeholder="selection_status" readonly/>
+                            </div>
+                            
+                            <div class="form-group col-md-8">
+                                <label for="id_proof" class="col-form-label">id_proof</label> 
+                                <input type="file" th:field="*{id_proof}" class="form-control" 
+                                            id="id_proof" placeholder="id_proof" />
+                            </div>
+                           
+                            
+                             <div class="form-group col-md-8">
+                                <label for="lastinterview_round" class="col-form-label">lastinterview_round</label> 
+                                <input type="text" th:field="*{lastinterview_round}" class="form-control" 
+                                            id="lastinterview_round" placeholder="lastinterview_round" readonly/>
+                            </div>
+                          
+                                                                                                            
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+
+                       <!--   <input type="hidden" id="id" th:field="*{id}">-->
+    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+				<div style=" font-size: 30px;  color: rgb(32, 7, 63); text-align: center;">
+					<div style="font-size: 40px; color: red; margin: 0 auto;">
+				
+					</div>
+
+<!--    The Telephone is equal to <span id="data3"> Telephone</span><br>-->
+    
+ <span id="data4" > </span><br>
+    </div>
+       
+    </div>
+    
+    <script>
+		
+	
+		document.getElementById('lastinterview_round').value = 'Round_One';
+
+		document.getElementById('selection_status').value = 'In-Progress';
+	
+    //document.getElementById('jobCodes').value = 'C0123';
+
+		//document.getElementById("data3").innerHTML=localStorage.getItem("txtValue3");
+		document.getElementById("data4").innerHTML = localStorage.getItem("txtValue4");
+
+
+		// Get the value from the span and set it as the Value for the input
+		var spanText = document.getElementById("data4").innerText;
+		document.getElementById("jobCodes").value = spanText;
+  
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>EmployeeCreation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+ 
+<body>
+    <div>
+        <form id="fileUploadForm"  th:action="@{/upload}" method="post" enctype="multipart/form-data"
+            th:object="${OnBoard}">
+            <div>
+                <div class="form-group col-md-8">
+                    <br>
+                    <label for="employeeId"></label>
+                    <input type="hidden" th:field="*{employeeId}" id="employeeId" placeholder="Employee ID" readonly />
+                </div>
+                <diV>
+                <label for="employeeCode">Employee ID:</label>
+				<input type="text" id="employeeCode" th:field="*{employeeCode}" th:value="${OnBoardlatest}">
+			</div>
+ 
+           
+                <div class="form-group col-md-8">
+                    <label for="idProof">Upload ID Proof:</label>
+                    <input type="file" th:field="*{idProofpath}" accept=".pdf, .jpg, .png" required />
+                </div>
+ 
+                <div class="form-group col-md-8">
+                    <label for="photograph">Photograph:</label>
+                    <input type="file" th:field="*{photographPath}" accept=".jpg, .png" required />
+                </div>
+ 
+      
+                  <div class="form-group col-md-8">
+			<label for="joiningDate">Date of Joining:</label>
+			<input type="date" th:field="*{dateOfJoining}"  id="joiningDate" placeholder="joiningDate" required>
+			</div>
+			
+               <div class="form-group col-md-8">
+			<label for="level">Level:</label>
+			<select id="level" th:field="*{level}" name="level">
+				<option value="level1">Level 1</option>
+				<option value="level2">Level 2</option>
+				<option value="level3">Level 3</option>
+				
+			</select>
+			</div>
+            
+            <div class="form-group col-md-8">
+			<label for="level">Background Check Status:</label>
+			<select id="Bk_Status" th:field="*{backgroundCheckStatus}" name="level">
+				<option value="initialize">initialize</option>
+				<option value="Cleared">Cleared</option>
+				<option value="Rejected">Rejected</option>
+			</select>
+			</div>
+           
+           <div class="form-group col-md-8">
+			<label for="level">Probation Peiod Status:</label>
+			<select id="PP_Status" th:field="*{probationPeriod}" name="level">
+				<option value="Under Problem">Probation</option>
+				<option value="confirmed">confirmed</option>
+			</select>
+            </div>
+            
+            <div class="form-group col-md-8">
+			<label for="relivingLetter">Reliving & Experince:</label>
+			<input type="file" th:field="*{relivingLetterPath}" accept=".pdf" required>
+			</div>
+                  
+                  
+                <div class="form-group col-md-8">
+                    <button type="button" onclick="uploadFiles()">Submit</button>
+                </div>
+            </div>
+          
+            
+        </form>
+        
+        <script>
+		function uploadFiles() {
+			// Submit the form when the button is clicked
+			
+			document.getElementById("fileUploadForm").submit();
+			window.alert("Files uploaded successfully!");
+			
+	
+	
+		}
+ 
+	</script>
+    </div>
+</body>
+ 
+</html>

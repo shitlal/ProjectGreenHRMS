@@ -1,0 +1,294 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Form</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+table {
+      border-collapse: collapse;
+      width: 100%;
+	  text-align:left;
+	  border: 1px solid white;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      text-align: left;
+      cursor: pointer;
+	  padding:4px 8px;
+	  border: 1px solid white;
+      background-color: #96D4D4;
+    }
+
+    .asc::after {
+      content: ' ↑';
+    }
+
+    .desc::after {
+      content: ' ↓';
+    }
+
+ #myInput {
+
+			background-position: 10px 10px;
+			background-repeat: no-repeat;
+			width: 15%;
+			font-size: 13px;
+			padding: 12px 20px 12px 40px;
+			border: 1px solid #ddd;
+			margin-bottom: 12px;
+		}
+
+		#myTable {
+			border-collapse: collapse;
+			width: 100%;
+			border: 1px solid #ddd;
+			font-size: 18px;
+		}
+
+		#myTable th,
+		#myTable td {
+			text-align: left;
+			padding: 12px;
+		}
+
+		#myTable tr {
+			border-bottom: 1px solid #ddd;
+		}
+
+		#myTable tr.header,
+		#myTable tr:hover {
+			background-color: #f1f1f1;
+		}  
+		.table-container {
+      height: 400px;
+      width: 1000px; /* Adjust the height as needed */
+      overflow-y: auto;
+    }
+	
+	  body {
+    
+            margin: 0;
+            padding: 0;
+        }
+ 
+        nav {
+            background-color: rgb(0, 128, 128);
+            overflow: hidden;
+        }
+ 
+        nav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 10px 12px;
+            text-decoration: none;
+        }
+ 
+        nav a:hover {
+            background-color: #ddd;
+            color: rgb(0, 0, 0);
+        }	
+		
+		
+		
+</style>
+
+  </head>
+  <body>
+	   <div class="container">
+      <!--<div class="apply_box">-->
+		  <br>
+	<nav>
+		<a th:href="@{/Career}"> <i>Career</i></a>
+		<a th:href="@{/Recruitment}"> <i>Recruitment</i></a>
+		<a th:href="@{/OnBoarding}"><i>OnBoarding</i></a>
+		<!-- Add more menu items as needed -->
+	</nav>
+		 <!---------->
+		  <br>
+        <h1><i>Career Opportunities</i>
+        
+        </h1>
+        <form action="">
+          <div class="form_container">
+			  
+			  <div class="button_container">
+            <button type="submit">Search</button>
+             <input type="text" placeholder="JobCode.." name="search" id="myInput" onkeyup="jobSearch()">
+          </div>
+          
+			<div class="button_container">
+				<button onClick="openWindow()">
+					Create New Job
+				</button>
+					
+			</div>
+ 
+    </div>
+          
+     <div th:switch="${career}" class="container my- scrollit"> 
+		  <div class="col-md-10">
+                <h2 th:case="null">No record found !!</h2>
+                <div th:case="*">
+    <div class="table-container">         
+<table id="myTable" >
+  <tr class="header">
+<!--   <th style="width:02%;">Sr. No.</th>-->
+    <th th:onclick="sortTable(0)" style="width:05%;" >JobCode </th>
+	<th th:onclick="sortTable(1)" style="width:05%;" >Position</th>
+     <th style="width:05%;" th:onclick="sortTable(2)">Description</th>
+      <th style="width:05%;" th:onclick="sortTable(3)">Location</th>
+       <th style="width:05%;" th:onclick="sortTable(4)">Experience</th>
+		<th style="width:05%;" th:onclick="sortTable(5)">Status</th>
+        <th style="width:20%;">Actions</th>
+        
+  </tr>
+  
+  
+    <tr th:each="career : ${career}">
+        <td th:text="${career.jobCode}">${career.jobCode}</td>
+        <td th:text="${career.position}"></td>
+        <td th:text="${career.description}"></td>
+        <td th:text="${career.location}"></td>
+        <td th:text="${career.experience}"></td>
+        <td id="status" th:text="${career.status}"></td>
+        
+    <td>		<button1 type="submit" onclick="openaddcandWindow()">Add Candidate</button1>  
+
+             <button type="submit" class="button1" id="editId" th:onclick="'openeditWindow(\'' + ${career.id} + '\');'"  >Edit </button>   
+
+     <button2 type="submit" th:onclick="'confirmDelete(\'' + ${career.id} + '\');'" >Delete</button2>  
+     </td>
+   
+      </tr>
+ 
+    </table>
+   
+</div>        </div></div></div>
+    </form>
+    </div>
+ <script language="JavaScript">
+	 
+function openWindow() {
+     var w = 480, h = 340;
+
+     if (document.getElementById) { 
+         w = screen.availWidth;
+         h = screen.availHeight;
+     }
+
+var popW = 700, popH = 500;
+
+var leftPos = (w-popW)/2;
+var topPos = (h-popH)/2;
+
+msgWindow = window.open('Career/create','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+}
+
+
+ function confirmDelete(id) {
+            var result = confirm("Are you sure you want to delete this record?");
+            if (result) {
+                window.location.href = "Career/delete/" + id;
+            }
+        }
+function openeditWindow(careerId) {
+//	var careerId=document.getElementById("careerId").value;
+     var w = 480, h = 340;
+
+     if (document.getElementById) { 
+         w = screen.availWidth;
+         h = screen.availHeight;
+     }
+
+var popW = 700, popH = 500;
+
+var leftPos = (w-popW)/2;
+var topPos = (h-popH)/2;
+
+msgWindow = window.open('Career/edit/'+careerId,'popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+ window.close();
+}
+function openaddcandWindow() {
+     var w = 480, h = 340;
+
+     if (document.getElementById) { 
+         w = screen.availWidth;
+         h = screen.availHeight;
+     }
+
+var popW = 700, popH = 500;
+
+var leftPos = (w-popW)/2;
+var topPos = (h-popH)/2;
+
+msgWindow = window.open('Career/createCand','popup','width=' + popW  + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ', scrollbars=yes');
+}
+function jobSearch() {
+			var input, filter, table, tr, td, i, txtValue;
+
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+		
+		
+    function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+ <!-- <script th:inline="javascript">
+ 
+  </script> 
+ -->   
+ </body>
+</html>
